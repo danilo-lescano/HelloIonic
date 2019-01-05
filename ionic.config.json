@@ -1,0 +1,7 @@
+{
+  "name": "BattleAssistant",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "ionic-angular"
+}
