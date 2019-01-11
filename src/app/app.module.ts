@@ -8,13 +8,17 @@ import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { MenuPage } from '../pages/menu/menu';
 import { BattlePage } from '../pages/battle/battle';
+import { PartyPage } from '../pages/party/party';
+import { MonsterPage } from '../pages/monster/monster';
 
 @NgModule({
   declarations: [
     MyApp,
     HomePage,
     MenuPage,
-    BattlePage
+    BattlePage,
+    PartyPage,
+    MonsterPage
   ],
   imports: [
     BrowserModule,
@@ -25,7 +29,9 @@ import { BattlePage } from '../pages/battle/battle';
     MyApp,
     HomePage,
     MenuPage,
-    BattlePage
+    BattlePage,
+    PartyPage,
+    MonsterPage
   ],
   providers: [
     StatusBar,

@@ -1,12 +1,14 @@
 import { Component, ViewChild } from '@angular/core';
 import { IonicPage, NavController, NavParams, Nav } from 'ionic-angular';
+
 import { HomePage } from '../home/home';
+import { MonsterPage } from '../monster/monster';
+import { PartyPage } from '../party/party';
 
 export interface PageInterface {
   title: string;
   pageName: string;
-  tabComponent?: any;
-  index?: number;
+  pageComponent?: any;
   icon: string;
 }
 
@@ -22,15 +24,14 @@ export class MenuPage {
   @ViewChild(Nav) nav: Nav;
 
   pages: PageInterface[] = [
-    {title: 'Partys', pageName: 'X', icon: 'people'},
-    {title: 'Monsters', pageName: 'Y', icon: 'paw'},
-    {title: 'Z', pageName: 'Z', icon: 'home'}
+    {title: 'Parties', pageName: 'PartyPage', pageComponent: PartyPage, icon: 'people'},
+    {title: 'Monsters', pageName: 'MonsterPage', pageComponent: MonsterPage, icon: 'paw'},
   ];
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {}
 
   openPage(page: PageInterface){
-
+    this.navCtrl.push(page.pageComponent);
   }
 
   isActive(page: PageInterface){
