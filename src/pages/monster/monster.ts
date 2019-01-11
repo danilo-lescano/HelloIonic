@@ -1,25 +1,30 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
-/**
- * Generated class for the MonsterPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
+import { MonsterService } from '../../services/monster.service';
+
+import { AddMonsterPage } from '../add-monster/add-monster';
+
+export interface IMonster {
+    name: string;
+    initiative: number;
+    hp: number;
+}
 
 @IonicPage()
 @Component({
-  selector: 'page-monster',
-  templateUrl: 'monster.html',
+	selector: 'page-monster',
+	templateUrl: 'monster.html',
 })
 export class MonsterPage {
+    private monsters: IMonster[] = [];
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
-  }
+ 	constructor(public navCtrl: NavController, public navParams: NavParams, private monsterService: MonsterService) {}
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad MonsterPage');
-  }
-
+	async ionViewWillEnter(){
+		this.monsters = await this.monsterService.getMonster();
+	}
+	renderAddMonsterPage(){
+		this.navCtrl.push(AddMonsterPage);
+	}
 }

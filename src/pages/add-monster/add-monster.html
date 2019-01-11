@@ -1,0 +1,28 @@
+<ion-header>
+	<ion-navbar>
+		<ion-buttons end>
+			<button ion-button icon-only (click)="renderAddMonsterPage()">
+				<ion-icon name="trash"></ion-icon>
+			</button>
+		</ion-buttons>
+		<ion-title>New Monster</ion-title>
+  	</ion-navbar>
+</ion-header>
+
+<ion-content padding>
+    <form (ngSubmit)="onAddMonster(f.value)" #f="ngForm">
+        <ion-item>
+          	<ion-label>Name</ion-label>
+          	<ion-input type="text" name="name" ngModel required>{{monster.name}}</ion-input>
+		</ion-item>
+		<ion-item>
+			<ion-label>Initiative</ion-label>
+			<ion-input type="string" name="initiative" ngModel required>{{monster.initiative}}</ion-input>
+		</ion-item>
+		<ion-item>
+			<ion-label>HP</ion-label>
+			<ion-input type="string" name="hp" ngModel required>{{monster.hp}}</ion-input>
+		</ion-item>
+        <button ion-button block type="submit" [disabled]="!f.valid">Save Monster</button>
+    </form>
+</ion-content>
