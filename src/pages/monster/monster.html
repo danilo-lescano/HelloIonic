@@ -12,6 +12,15 @@
 
 <ion-content padding>
 	<ion-list>
-		<ion-item *ngFor="let monster of monsters">{{monster.name}}</ion-item>
+		<ng-container *ngFor="let monster of monsters">
+			<ion-item *ngIf="!monster.isPlayer">
+				<h2>{{monster.name}}</h2>
+				<ion-buttons class="eddit-button">
+					<button ion-button icon-only (click)="renderAddMonsterPage(monster)">
+							<ion-icon name="create"></ion-icon>
+					</button>
+				</ion-buttons>
+			</ion-item>
+		</ng-container>
 	</ion-list>
 </ion-content>

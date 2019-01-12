@@ -6,9 +6,11 @@ import { MonsterService } from '../../services/monster.service';
 import { AddMonsterPage } from '../add-monster/add-monster';
 
 export interface IMonster {
-    name: string;
-    initiative: number;
-    hp: number;
+	id: number;
+	isPlayer: boolean;
+	name: string;
+	initiative: string;
+	hp: string;
 }
 
 @IonicPage()
@@ -23,8 +25,16 @@ export class MonsterPage {
 
 	async ionViewWillEnter(){
 		this.monsters = await this.monsterService.getMonster();
+		this.monsters.sort(function(a, b){
+			if(a.name < b.name) return -1;
+			if(a.name > b.name) return 1;
+			return 0;
+		});
 	}
-	renderAddMonsterPage(){
-		this.navCtrl.push(AddMonsterPage);
+	renderAddMonsterPage(monster?: IMonster){
+		if(monster != null)
+			this.navCtrl.push(AddMonsterPage, {monster});
+		else
+			this.navCtrl.push(AddMonsterPage);
 	}
 }

@@ -11,17 +11,25 @@
 
 <ion-content padding>
     <form (ngSubmit)="onAddMonster(f.value)" #f="ngForm">
+		<ion-item>
+			<ion-input type="hidden" name="id" ngModel [(ngModel)]="monster.id"></ion-input>
+		</ion-item>
         <ion-item>
           	<ion-label>Name</ion-label>
-          	<ion-input type="text" name="name" ngModel required>{{monster.name}}</ion-input>
+          	<ion-input type="text" name="name" ngModel [(ngModel)]="monster.name" required></ion-input>
 		</ion-item>
 		<ion-item>
 			<ion-label>Initiative</ion-label>
-			<ion-input type="string" name="initiative" ngModel required>{{monster.initiative}}</ion-input>
+			<ion-input type="string" name="initiative" ngModel [(ngModel)]="monster.initiative"></ion-input>
 		</ion-item>
 		<ion-item>
 			<ion-label>HP</ion-label>
-			<ion-input type="string" name="hp" ngModel required>{{monster.hp}}</ion-input>
+			<ion-input type="string" name="hp" ngModel ngModel [(ngModel)]="monster.hp"></ion-input>
+		</ion-item>
+		<ion-item>
+			<ion-label *ngIf="!isPlayer">This is a monster!</ion-label>
+			<ion-label *ngIf="isPlayer">This is a NPC/Player!</ion-label>
+			<ion-toggle name="isPlayer" [(ngModel)]="monster.isPlayer"></ion-toggle>
 		</ion-item>
         <button ion-button block type="submit" [disabled]="!f.valid">Save Monster</button>
     </form>
