@@ -21,4 +21,20 @@
     <button ion-button icon-only block (click)="toBattlePage()">
         START BATTLE!!!
     </button>
+
+
+    <form [formGroup]="authForm" (ngSubmit)="onSubmit(authForm.value)">
+        <ion-item>
+            <ion-label floating>Username</ion-label>
+            <ion-input formControlName="username" type="text"></ion-input>
+        </ion-item>
+    
+        <ion-item>
+            <ion-label floating>Password</ion-label>
+            <ion-input formControlName="password" type="password"></ion-input>
+        </ion-item>
+    
+        <button ion-button full color="primary" [disabled]="!authForm.valid" style="margin-top: 20px;" type="submit">Authorize</button>        
+    </form>
+
 </ion-content>

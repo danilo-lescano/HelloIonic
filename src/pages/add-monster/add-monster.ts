@@ -18,7 +18,6 @@ export interface IMonster {
 })
 export class AddMonsterPage {
 	private monster: IMonster;
-	private isPlayer: boolean;
 
 	constructor(public navCtrl: NavController, public navParams: NavParams, private monsterService: MonsterService) {}
 
@@ -32,12 +31,16 @@ export class AddMonsterPage {
 				initiative: null,
 				hp: null
 			}
-			this.isPlayer = false;
 		}
   	}
 
 	onAddMonster(monster: IMonster){
 		this.monsterService.addMonster(monster);
+		this.navCtrl.pop();
+	}
+	trashThisMonster(){
+		if(this.monster.id != null)
+			this.monsterService.delMonster(this.monster);
 		this.navCtrl.pop();
 	}
 }

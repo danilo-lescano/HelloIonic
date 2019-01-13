@@ -1,11 +1,12 @@
 <ion-header>
 	<ion-navbar>
 		<ion-buttons end>
-			<button ion-button icon-only (click)="renderAddMonsterPage()">
+			<button ion-button icon-only (click)="trashThisMonster()">
 				<ion-icon name="trash"></ion-icon>
 			</button>
 		</ion-buttons>
-		<ion-title>New Monster</ion-title>
+		<ion-title *ngIf="monster.id">Editing {{monster.name}}</ion-title>
+		<ion-title *ngIf="!monster.id">New Monster</ion-title>
   	</ion-navbar>
 </ion-header>
 
@@ -27,8 +28,8 @@
 			<ion-input type="string" name="hp" ngModel ngModel [(ngModel)]="monster.hp"></ion-input>
 		</ion-item>
 		<ion-item>
-			<ion-label *ngIf="!isPlayer">This is a monster!</ion-label>
-			<ion-label *ngIf="isPlayer">This is a NPC/Player!</ion-label>
+			<ion-label *ngIf="!monster.isPlayer">This is a monster!</ion-label>
+			<ion-label *ngIf="monster.isPlayer">This is a NPC/Player!</ion-label>
 			<ion-toggle name="isPlayer" [(ngModel)]="monster.isPlayer"></ion-toggle>
 		</ion-item>
         <button ion-button block type="submit" [disabled]="!f.valid">Save Monster</button>
