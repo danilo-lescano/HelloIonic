@@ -39,14 +39,12 @@ export class PartyService {
     }
 
     addParty(party: IParty){
-		console.log(party)
-        if(party.id === null)
+        if(party.id === null || party.id === undefined)
             party.id = ++this.partyCount;
         
         var isEdited = false;
         for (let i = 0; i < this.parties.length && !isEdited; i++) {
             if(party.id == this.parties[i].id){
-                console.log("hey");
                 isEdited = true;
                 this.parties[i] = party;
             }

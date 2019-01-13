@@ -31,15 +31,21 @@
 				</button>
 			</ion-buttons>
 		</ion-item>
-		<ion-item *ngFor="let creature of creatures">
-			<h2>{{creature.name}}</h2>
-			<ion-buttons class="eddit-button">
-				<button ion-button icon-only type="button" (click)="trashCreature(creature)">
-					<ion-icon name="trash"></ion-icon>
-				</button>
-			</ion-buttons>
-		</ion-item>
+		<ng-container *ngFor="let creature of creatures">
+			<ion-item *ngIf="creature">
+				<h2>{{creature.name}}</h2>
+				<ion-buttons class="eddit-button">
+					
+					<!--<button ion-button icon-only small (click)="renderAddCreaturePage(creature)">
+						<ion-icon name="create"></ion-icon>
+					</button>-->
 
+					<button ion-button icon-only small type="button" (click)="trashCreature(creature)">
+						<ion-icon name="trash"></ion-icon>
+					</button>
+				</ion-buttons>
+			</ion-item>
+		</ng-container>
 		<button ion-button block type="submit" [disabled]="!partyForm.valid">Save Party</button>
 	</form>
 </ion-content>

@@ -4,6 +4,7 @@ import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms'
 
 import { CreatureService } from '../../services/creature.service';
 import { PartyService } from '../../services/party.service';
+import { AddCreaturePage } from '../add-creature/add-creature';
 
 export interface ICreature {
 	id: number;
@@ -42,17 +43,10 @@ export class AddPartyPage {
 	}
 
 	async loadParty(){
-    	this.party = await this.navParams.get("party");
-    	this.allCreatures = await this.creatureService.getCreature();
-    	if(this.party == null){
-      		this.party = {
-				id: null,
-				name: '',
-				creaturesId: [],
-			}
-		}
-		else{
-			console.log(this.party)
+		var partyAux: IParty = await this.navParams.get("party");
+		if(partyAux !== undefined && partyAux !== null) this.party = partyAux;
+		this.allCreatures = await this.creatureService.getCreature();
+    	if(this.party && this.party.id !== null){
 			for (let i = 0; this.party.creaturesId && i < this.party.creaturesId.length; i++) {
 				for (let j = 0; j < this.allCreatures.length; j++) {
 					if(this.party.creaturesId[i] === this.allCreatures[j].id){
@@ -61,7 +55,6 @@ export class AddPartyPage {
 				}
 			}
 		}
-		console.log(this.party)
 		return;
 	}
 
@@ -70,7 +63,6 @@ export class AddPartyPage {
 			this.party.creaturesId = [];
 		this.party.creaturesId[this.creatures.length] = this.allCreatures[this.creatures.length].id;
 		this.creatures[this.creatures.length] = this.allCreatures[this.creatures.length];
-		console.log(this.party)
 	}
 	trashCreature(creature: ICreature){
 		for (let i = 0; i < this.party.creaturesId.length; i++) {
@@ -79,11 +71,20 @@ export class AddPartyPage {
 				break;
 			}
 		}
-	}
 
+		for (let i = 0; i < this.creatures.length; i++) {
+			if(this.creatures[i].id === creature.id){
+				this.creatures.splice(i, 1);
+				break;
+			}
+		}
+	}
+	renderAddCreaturePage(creature?: ICreature){
+		this.navCtrl.push(AddCreaturePage, {creature});
+	}
 	onAddParty(party: IParty){
-		console.log(this.party)
-		this.partyService.addParty(party);
+		this.party.name = party.name;
+		this.partyService.addParty(this.party);
 		this.navCtrl.pop();
 	}
 	trashThisParty(){
