@@ -34,6 +34,7 @@ export class AddCreaturePage {
 	}
 
 	async loadCreature(){
+		var isPlayer = await this.navParams.get("isPlayer");
     	this.creature = await this.navParams.get("creature");
     	if(this.creature == null){
       		this.creature = {
@@ -44,6 +45,7 @@ export class AddCreaturePage {
 				hp: null
 			}
 		}
+		this.creature.isPlayer = isPlayer ? true : false;
 		return;
   	}
 

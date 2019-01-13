@@ -1,0 +1,45 @@
+<ion-header>
+	<ion-navbar>
+		<ion-buttons end>
+			<button ion-button icon-only (click)="trashThisParty()">
+				<ion-icon name="trash"></ion-icon>
+			</button>
+		</ion-buttons>
+		<ion-title *ngIf="party.id">Editing {{party.name}}</ion-title>
+		<ion-title *ngIf="!party.id">New Party</ion-title>
+	</ion-navbar>
+</ion-header>
+
+<ion-content padding>
+	<form [formGroup]="partyForm" (ngSubmit)="onAddParty(partyForm.value)">
+		<ion-item style="display: none;">
+			<ion-input type="hidden" formControlName="id" [(ngModel)]="party.id"></ion-input>
+		</ion-item>
+		<ion-item>
+			<ion-label>Name</ion-label>
+			<ion-input type="text" formControlName="name" [(ngModel)]="party.name"></ion-input>
+		</ion-item>
+		<ion-item *ngIf="partyForm.controls.name.hasError('required') && partyForm.controls.name.touched">
+			<p style="color: red;">Sorry, field name is required!</p>
+		</ion-item>
+
+		<ion-item>
+			<h2>Party List</h2>
+			<ion-buttons class="add-button">
+				<button ion-button round icon-only type="button" (click)="addCreature()">
+					<ion-icon name="add-circle"></ion-icon>
+				</button>
+			</ion-buttons>
+		</ion-item>
+		<ion-item *ngFor="let creature of creatures">
+			<h2>{{creature.name}}</h2>
+			<ion-buttons class="eddit-button">
+				<button ion-button icon-only type="button" (click)="trashCreature(creature)">
+					<ion-icon name="trash"></ion-icon>
+				</button>
+			</ion-buttons>
+		</ion-item>
+
+		<button ion-button block type="submit" [disabled]="!partyForm.valid">Save Party</button>
+	</form>
+</ion-content>

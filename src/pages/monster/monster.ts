@@ -32,9 +32,10 @@ export class MonsterPage {
 		});
 	}
 	renderAddCreaturePage(creature?: ICreature){
+		var isPlayer = false;
 		if(creature != null)
 			this.navCtrl.push(AddCreaturePage, {creature});
 		else
-			this.navCtrl.push(AddCreaturePage);
+			this.navCtrl.push(AddCreaturePage, { isPlayer });
 	}
 }

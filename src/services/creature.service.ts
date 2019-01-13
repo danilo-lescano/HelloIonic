@@ -15,18 +15,8 @@ export class CreatureService {
     private creatureCount: number = 0;
 
     constructor(private storage: Storage){
-        this.storage.clear();
-        console.log("cleaning");
-        console.log("cleaning");
-        console.log("cleaning");
-        console.log("cleaning");
-        console.log("cleaning");
-        console.log("cleaning");
-        console.log("cleaning");
-        console.log("cleaning");
-        console.log("cleaning");
-        console.log("cleaning");
-        //this.load();
+        //this.storage.clear();
+        this.load();
     }
 
     async load(){

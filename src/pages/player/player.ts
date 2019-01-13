@@ -32,9 +32,10 @@ export class PlayerPage {
 		});
 	}
 	renderAddCreaturePage(creature?: ICreature){
+		var isPlayer = true;
 		if(creature != null)
-			this.navCtrl.push(AddCreaturePage, {creature});
+			this.navCtrl.push(AddCreaturePage, { creature });
 		else
-			this.navCtrl.push(AddCreaturePage);
+			this.navCtrl.push(AddCreaturePage, { isPlayer });
 	}
 }

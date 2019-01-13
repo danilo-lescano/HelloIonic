@@ -5,6 +5,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 import { IonicStorageModule } from '@ionic/storage';
 
+import { PartyService } from '../services/party.service';
 import { CreatureService } from '../services/creature.service';
 
 import { MyApp } from './app.component';
@@ -15,6 +16,7 @@ import { PartyPage } from '../pages/party/party';
 import { MonsterPage } from '../pages/monster/monster';
 import { AddCreaturePage } from '../pages/add-creature/add-creature';
 import { PlayerPage } from '../pages/player/player';
+import { AddPartyPage } from '../pages/add-party/add-party';
 
 @NgModule({
   declarations: [
@@ -25,6 +27,7 @@ import { PlayerPage } from '../pages/player/player';
     PartyPage,
     MonsterPage,
     AddCreaturePage,
+    AddPartyPage,
     PlayerPage,
   ],
   imports: [
@@ -41,12 +44,14 @@ import { PlayerPage } from '../pages/player/player';
     PartyPage,
     MonsterPage,
     AddCreaturePage,
+    AddPartyPage,
     PlayerPage,
   ],
   providers: [
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
+    PartyService,
     CreatureService,
     Storage
   ]
