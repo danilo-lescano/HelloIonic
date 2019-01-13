@@ -1,0 +1,35 @@
+<ion-header>
+	<ion-navbar>
+		<ion-title>Add To Party</ion-title>
+		<ion-buttons end>
+			<button ion-button (click)="closeMe()">Close</button>
+		</ion-buttons>
+	</ion-navbar>
+</ion-header>
+
+
+<ion-content padding>
+	<p>Add creatures, players or npcs to the party.</p>
+	<ion-item>
+		<ion-label>Name</ion-label>
+		<ion-input type="string" [(ngModel)]="nameSearch"></ion-input>
+	</ion-item>
+	<ion-item>
+		<ion-label>Player or NPCs</ion-label>
+		<ion-checkbox [(ngModel)]="isPlayer"></ion-checkbox>
+	</ion-item>
+	<ion-item>
+		<ion-label>Monster</ion-label>
+		<ion-checkbox [(ngModel)]="isMonster"></ion-checkbox>
+	</ion-item>
+	<ng-container *ngFor="let creature of creatures">
+		<ion-item *ngIf="((creature.isPlayer && isPlayer) || (!creature.isPlayer && isMonster)) && (nameSearch == '' || creature.name.toLowerCase().includes(nameSearch.toLowerCase()))">
+			<h2>{{creature.name}}</h2>
+			<ion-buttons class="add-button">
+				<button ion-button icon-only small type="button" (click)="addCreature(creature)">
+					<ion-icon name="add"></ion-icon>
+				</button>
+			</ion-buttons>
+		</ion-item>
+	</ng-container>
+</ion-content>
