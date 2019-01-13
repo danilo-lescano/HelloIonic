@@ -5,7 +5,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 import { IonicStorageModule } from '@ionic/storage';
 
-import { MonsterService } from '../services/monster.service';
+import { CreatureService } from '../services/creature.service';
 
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
@@ -13,7 +13,8 @@ import { MenuPage } from '../pages/menu/menu';
 import { BattlePage } from '../pages/battle/battle';
 import { PartyPage } from '../pages/party/party';
 import { MonsterPage } from '../pages/monster/monster';
-import { AddMonsterPage } from '../pages/add-monster/add-monster';
+import { AddCreaturePage } from '../pages/add-creature/add-creature';
+import { PlayerPage } from '../pages/player/player';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { AddMonsterPage } from '../pages/add-monster/add-monster';
     BattlePage,
     PartyPage,
     MonsterPage,
-    AddMonsterPage,
+    AddCreaturePage,
+    PlayerPage,
   ],
   imports: [
     BrowserModule,
@@ -38,13 +40,14 @@ import { AddMonsterPage } from '../pages/add-monster/add-monster';
     BattlePage,
     PartyPage,
     MonsterPage,
-    AddMonsterPage,
+    AddCreaturePage,
+    PlayerPage,
   ],
   providers: [
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    MonsterService,
+    CreatureService,
     Storage
   ]
 })

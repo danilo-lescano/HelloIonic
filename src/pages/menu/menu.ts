@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams, Nav } from 'ionic-angular';
 
 import { HomePage } from '../home/home';
 import { MonsterPage } from '../monster/monster';
+import { PlayerPage } from '../player/player';
 import { PartyPage } from '../party/party';
 
 export interface PageInterface {
@@ -26,6 +27,7 @@ export class MenuPage {
   pages: PageInterface[] = [
     {title: 'Parties', pageName: 'PartyPage', pageComponent: PartyPage, icon: 'people'},
     {title: 'Monsters', pageName: 'MonsterPage', pageComponent: MonsterPage, icon: 'paw'},
+    {title: 'Player', pageName: 'PlayerPage', pageComponent: PlayerPage, icon: 'person'},
   ];
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {}

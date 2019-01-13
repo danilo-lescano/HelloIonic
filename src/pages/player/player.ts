@@ -15,15 +15,15 @@ export interface ICreature {
 
 @IonicPage()
 @Component({
-	selector: 'page-monster',
-	templateUrl: 'monster.html',
+  selector: 'page-player',
+  templateUrl: 'player.html',
 })
-export class MonsterPage {
+export class PlayerPage {
     private creatures: ICreature[] = [];
 
  	constructor(public navCtrl: NavController, public navParams: NavParams, private creatureService: CreatureService) {}
 
-	async ionViewWillEnter(){
+   async ionViewWillEnter(){
 		this.creatures = await this.creatureService.getCreature();
 		this.creatures.sort(function(a, b){
 			if(a.name < b.name) return -1;
