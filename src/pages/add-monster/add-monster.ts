@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 
 import { MonsterService } from '../../services/monster.service';
 
@@ -18,11 +19,22 @@ export interface IMonster {
 })
 export class AddMonsterPage {
 	private monster: IMonster;
+	private monsterForm: any;
 
-	constructor(public navCtrl: NavController, public navParams: NavParams, private monsterService: MonsterService) {}
+	constructor(public navCtrl: NavController, public navParams: NavParams, private monsterService: MonsterService, private formBuilder: FormBuilder) {
+		this.loadMonster().then(()=>{
+			this.monsterForm = formBuilder.group({
+				id: ['', Validators.compose([])],
+				name: ['', Validators.compose([Validators.required])],
+				initiative: ['', Validators.compose([Validators.pattern(/\d*d?\d+/g)])],
+				hp: ['', Validators.compose([Validators.pattern(/\d*d?\d+/g)])],
+				isPlayer: ['', Validators.compose([])],
+			});
+		});
+	}
 
-	async ionViewWillLoad(){
-    	this.monster = this.navParams.get("monster");
+	async loadMonster(){
+    	this.monster = await this.navParams.get("monster");
     	if(this.monster == null){
       		this.monster = {
 				id: null,
@@ -32,6 +44,7 @@ export class AddMonsterPage {
 				hp: null
 			}
 		}
+		return;
   	}
 
 	onAddMonster(monster: IMonster){

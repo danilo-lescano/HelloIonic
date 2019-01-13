@@ -11,27 +11,37 @@
 </ion-header>
 
 <ion-content padding>
-    <form (ngSubmit)="onAddMonster(f.value)" #f="ngForm">
-		<ion-item>
-			<ion-input type="hidden" name="id" ngModel [(ngModel)]="monster.id"></ion-input>
+    <form [formGroup]="monsterForm" (ngSubmit)="onAddMonster(monsterForm.value)">
+		<ion-item style="display: none;">
+			<ion-input type="hidden" formControlName="id" [(ngModel)]="monster.id"></ion-input>
 		</ion-item>
         <ion-item>
           	<ion-label>Name</ion-label>
-          	<ion-input type="text" name="name" ngModel [(ngModel)]="monster.name" required></ion-input>
+          	<ion-input type="text" formControlName="name" [(ngModel)]="monster.name"></ion-input>
 		</ion-item>
+        <ion-item *ngIf="monsterForm.controls.name.hasError('required') && monsterForm.controls.name.touched">
+			<p style="color: red;">Sorry, field name is required!</p>
+		</ion-item>
+
 		<ion-item>
 			<ion-label>Initiative</ion-label>
-			<ion-input type="string" name="initiative" ngModel [(ngModel)]="monster.initiative"></ion-input>
+			<ion-input type="string" formControlName="initiative" [(ngModel)]="monster.initiative"></ion-input>
+		</ion-item>
+        <ion-item *ngIf="monsterForm.controls.initiative.hasError('pattern') && monsterForm.controls.initiative.touched">
+			<p style="color: red;">Ex: d20 + 4 or 2d10</p>
 		</ion-item>
 		<ion-item>
 			<ion-label>HP</ion-label>
-			<ion-input type="string" name="hp" ngModel ngModel [(ngModel)]="monster.hp"></ion-input>
+			<ion-input type="string" formControlName="hp" [(ngModel)]="monster.hp"></ion-input>
+		</ion-item>
+        <ion-item *ngIf="monsterForm.controls.hp.hasError('pattern') && monsterForm.controls.hp.touched">
+			<p style="color: red;">Ex: 5d8 + 20 or 2d10 + 5d4 + 10</p>
 		</ion-item>
 		<ion-item>
 			<ion-label *ngIf="!monster.isPlayer">This is a monster!</ion-label>
 			<ion-label *ngIf="monster.isPlayer">This is a NPC/Player!</ion-label>
-			<ion-toggle name="isPlayer" [(ngModel)]="monster.isPlayer"></ion-toggle>
+			<ion-toggle formControlName="isPlayer" [(ngModel)]="monster.isPlayer"></ion-toggle>
 		</ion-item>
-        <button ion-button block type="submit" [disabled]="!f.valid">Save Monster</button>
+        <button ion-button block type="submit" [disabled]="!monsterForm.valid">Save Monster</button>
     </form>
 </ion-content>

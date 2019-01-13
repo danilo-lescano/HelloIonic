@@ -15,6 +15,7 @@ export class MonsterService {
     private monsterCount: number = 0;
 
     constructor(private storage: Storage){
+        //this.storage.clear();
         this.load();
     }
 
@@ -22,7 +23,7 @@ export class MonsterService {
         var monstersAux = await this.storage.get("monsters");
         var monsterCountAux = await this.storage.get("monsterCount");
 
-        if(!monstersAux || !monsterCountAux){
+        if(monstersAux === null || monsterCountAux === null){
             this.storage.set('monsters', this.monsters);
             this.storage.set('monsterCount', this.monsterCount);
         }
