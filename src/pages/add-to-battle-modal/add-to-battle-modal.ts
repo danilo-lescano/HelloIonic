@@ -63,6 +63,32 @@ export class AddToBattleModalPage {
 		this.viewController.dismiss();
 	}
 	returnThisCreatures(){
+		for (let i = 0; i < this.partiesId.length; i++) {
+			var flag = true;
+			for (let j = 0; j < this.parties.length && flag; j++){
+				if(i === this.parties[j].id){
+					flag = false;
+					for (let k = 0; k < this.parties[j].creaturesId.length; k++){
+						if(!this.creaturesId[this.parties[j].creaturesId[k]])
+							this.creaturesId[this.parties[j].creaturesId[k]] = 0;
+						this.creaturesId[this.parties[j].creaturesId[k]]++;
+					}
+				}
+			}
+		}
+
+		for (let i = 0; i < this.creaturesId.length; i++)
+			if(this.creaturesId[i]){
+				var flag = true;
+				for (let j = 0; j < this.creatures.length && flag; j++)
+					if(this.creatures[j].id === i){
+						flag = false;
+						for (let k = 0; k < this.creaturesId[i]; k++)
+							this.creaturesSendBack.push(this.creatures[j]);
+					}
+			}
+
+		console.log(this.creaturesSendBack);
 		this.viewController.dismiss(this.creaturesSendBack);
 	}
 }
