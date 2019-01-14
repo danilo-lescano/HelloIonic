@@ -41,7 +41,7 @@ export class AddCreaturePage {
 				id: null,
 				isPlayer: false,
 				name: null,
-				initiative: null,
+				initiative: "1d20",
 				hp: null
 			}
 		}

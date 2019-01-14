@@ -1,12 +1,20 @@
 <ion-header>
-
-  <ion-navbar>
-    <ion-title>Battle</ion-title>
-  </ion-navbar>
-
+	<ion-navbar>
+		<ion-title>Battle</ion-title>
+	</ion-navbar>
 </ion-header>
 
 
 <ion-content padding>
-  Up for some battle?
+	<ion-list>
+		<ion-item>add to battle modal</ion-item>
+		<ion-item *ngFor="let creature of battleCreatures">battle creature aqui</ion-item>
+		<ion-item>
+			<ion-buttons>
+				<button ion-button block (click)="addCreature()">
+					addCreature
+				</button>
+			</ion-buttons>
+		</ion-item>
+	</ion-list>
 </ion-content>
