@@ -88,7 +88,6 @@ export class AddToBattleModalPage {
 					}
 			}
 
-		console.log(this.creaturesSendBack);
 		this.viewController.dismiss(this.creaturesSendBack);
 	}
 }
