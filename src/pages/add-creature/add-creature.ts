@@ -45,7 +45,7 @@ export class AddCreaturePage {
 				hp: null
 			}
 		}
-		this.creature.isPlayer = isPlayer ? true : false;
+		this.creature.isPlayer = isPlayer ? isPlayer : this.creature.isPlayer;
 		return;
   	}
 

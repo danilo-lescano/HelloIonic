@@ -2,7 +2,12 @@
 	<ion-navbar>
 		<ion-title>Add To Party</ion-title>
 		<ion-buttons end>
-			<button ion-button (click)="closeMe()">Close</button>
+			<button ion-button large (click)="addThisCreatures()">
+				<ion-icon name="add-circle"></ion-icon>
+			</button>
+			<button ion-button large (click)="closeMe()">
+				<ion-icon name="close-circle"></ion-icon>
+			</button>
 		</ion-buttons>
 	</ion-navbar>
 </ion-header>
@@ -26,6 +31,10 @@
 		<ion-item *ngIf="((creature.isPlayer && isPlayer) || (!creature.isPlayer && isMonster)) && (nameSearch == '' || creature.name.toLowerCase().includes(nameSearch.toLowerCase()))">
 			<h2>{{creature.name}}</h2>
 			<ion-buttons class="add-button">
+				<span *ngIf="creaturesAdded[creature.id] !== undefined">{{ creaturesAdded[creature.id] }}</span>
+				<button ion-button icon-only small type="button" (click)="removeCreature(creature)">
+					<ion-icon name="remove"></ion-icon>
+				</button>
 				<button ion-button icon-only small type="button" (click)="addCreature(creature)">
 					<ion-icon name="add"></ion-icon>
 				</button>

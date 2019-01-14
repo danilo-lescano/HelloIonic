@@ -108,14 +108,14 @@ export class AddPartyPage {
 
 		modalView.present();
 
-		modalView.onDidDismiss((creature? : ICreature)=>{
+		modalView.onDidDismiss((creature? : ICreature[])=>{
 			if(creature){
-				var flag = true;
-				for (let i = 0; i < this.allCreatures.length && flag; i++) {
-					if(creature.id === this.allCreatures[i].id){
-						flag = false;
-						this.party.creaturesId[this.party.creaturesId.length] = creature.id;
-						this.creatures[this.creatures.length] = this.allCreatures[i];
+				for (let i = 0; i < this.allCreatures.length; i++) {
+					for (let j = 0; j < creature.length; j++) {
+						if(creature[j].id === this.allCreatures[i].id){
+							this.party.creaturesId[this.party.creaturesId.length] = creature[j].id;
+							this.creatures[this.creatures.length] = this.allCreatures[i];
+						}
 					}
 				}
 				this.sortCreatures();

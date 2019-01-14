@@ -37,7 +37,6 @@ export class PartyPage {
 		});
 	}
 	renderAddPartyPage(party?: IParty) {
-		console.log(party)
 		if (party != null)
 			this.navCtrl.push(AddPartyPage, { party });
 		else

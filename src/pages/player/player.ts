@@ -34,7 +34,7 @@ export class PlayerPage {
 	renderAddCreaturePage(creature?: ICreature){
 		var isPlayer = true;
 		if(creature != null)
-			this.navCtrl.push(AddCreaturePage, { creature });
+			this.navCtrl.push(AddCreaturePage, { creature, isPlayer });
 		else
 			this.navCtrl.push(AddCreaturePage, { isPlayer });
 	}
