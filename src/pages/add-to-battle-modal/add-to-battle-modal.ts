@@ -65,6 +65,7 @@ export class AddToBattleModalPage {
 	returnThisCreatures(){
 		for (let i = 0; i < this.partiesId.length; i++) {
 			var flag = true;
+			if(this.partiesId[i] !== undefined)
 			for (let j = 0; j < this.parties.length && flag; j++){
 				if(i === this.parties[j].id){
 					flag = false;
@@ -76,6 +77,7 @@ export class AddToBattleModalPage {
 				}
 			}
 		}
+		console.log(this.creaturesSendBack);
 
 		for (let i = 0; i < this.creaturesId.length; i++)
 			if(this.creaturesId[i]){
@@ -87,7 +89,7 @@ export class AddToBattleModalPage {
 							this.creaturesSendBack.push(this.creatures[j]);
 					}
 			}
-
+		console.log(this.creaturesSendBack);
 		this.viewController.dismiss(this.creaturesSendBack);
 	}
 }
