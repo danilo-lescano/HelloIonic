@@ -34,7 +34,12 @@
 			</h2>
 			<div>
 				<div class="genBox">
-					HP: <span contenteditable="true">{{creature.genHp}}</span>
+					<span ion-text [color]="creature.colorSpan">
+						HP:
+						<span contenteditable="true">{{creature.genHp}}</span>
+					</span>
+					<span>/{{creature.maxHp}}</span>
+					
 					<ion-buttons class="add-button">
 						<button ion-button icon-only small color="danger" type="button" (click)="damageHp(creature)">
 							<ion-icon name="remove"></ion-icon>

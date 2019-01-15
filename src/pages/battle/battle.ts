@@ -12,6 +12,9 @@ export interface ICreatureGen{
 	isPlayer: boolean,
 	genInitiative: number;
 	genHp: number;
+	maxHp: number;
+	colorSpan: string;
+	colorFlag: number;
 }
 
 @IonicPage()
@@ -27,6 +30,9 @@ export class BattlePage {
 	private battleCreatures: ICreatureGen[] = [];
 
 	private multiplier: number = 1;
+
+	private isDamage: boolean = false;
+	private isHeal: boolean = false;
 	
 
 	constructor(public navCtrl: NavController, public navParams: NavParams, private creatureService: CreatureService, private partyService: PartyService, private modal: ModalController, private popoverCtrl: PopoverController) {}
@@ -42,31 +48,31 @@ export class BattlePage {
 			initiative: creature.initiative,
 			hp: creature.hp,
 			isPlayer: creature.isPlayer,
-			genHp: 0,
-			genInitiative: 0
+			genInitiative: this.calculateDices(creature.initiative),
+			genHp: this.calculateDices(creature.hp),
+			maxHp: this.calculateDices(creature.hp),
+			colorSpan: "",
+			colorFlag: null
 		};
-		var dices;
-		var matchRegex = /\d*d?\d+/;
-		dices = matchRegex.exec(aux.initiative);
-		dices = dices ? dices : [];
-		for (let i = 0; i < dices.length; i++)
-			aux.genInitiative += this.calculateDice(dices[i]);
-		dices = matchRegex.exec(aux.hp);
-		dices = dices ? dices : [];
-		for (let i = 0; i < dices.length; i++)
-			aux.genHp += this.calculateDice(dices[i]);
 		return aux;
 	}
-	calculateDice(die: string){
-		if(!/d/.test(die))
-			return parseInt(die.trim());
-		var numbs = die.split('d');
-		var first = parseInt(numbs[0].trim());
-		first = first? first : 1;
-		var second = parseInt(numbs[1].trim());
-		var value = 0;
-		for (let i = 0; i < first; i++)
-			value += Math.floor(Math.random() * second + 1);
+	calculateDices(diceString: string){
+		function calculateDie(die: string){
+			if(!/d/.test(die)) return parseInt(die.trim());
+			var numbs = die.split('d');
+			var first: number = parseInt(numbs[0].trim()) || 1;
+			var second: number = parseInt(numbs[1].trim());
+			var value: number = 0;
+			for (let i = 0; i < first; i++)
+				value += Math.floor(Math.random() * second + 1);
+			return value;
+		}
+
+		var matchRegex = /\d*d?\d+/;
+		var dices = matchRegex.exec(diceString) || [];
+		var value: number = 0;
+		for (let i = 0; i < dices.length; i++)
+			value += calculateDie(dices[i]);
 		return value;
 	}
 
@@ -113,9 +119,29 @@ export class BattlePage {
 	}
 
 	damageHp(creature: ICreatureGen){
+		var color = "";
+		var colorFlag = creature.colorFlag = Math.random();
 		creature.genHp -= this.multiplier;
+		creature.colorSpan = "danger";
+
+		if(creature.genHp <= 0) color = "danger";
+		if(creature.genHp > creature.maxHp) color = "secondary";
+		setTimeout(() =>{
+			if(creature.colorFlag = colorFlag)
+				creature.colorSpan = color;
+		}, 1000);
 	}
 	healHp(creature: ICreatureGen){
+		var color = "";
+		var colorFlag = creature.colorFlag = Math.random();
 		creature.genHp += this.multiplier;
+		creature.colorSpan = "secondary";
+
+		if(creature.genHp <= 0) color = "danger";
+		if(creature.genHp > creature.maxHp) color = "secondary";
+		setTimeout(() =>{
+			if(creature.colorFlag = colorFlag)
+				creature.colorSpan = color;
+		}, 1000);
 	}
 }
