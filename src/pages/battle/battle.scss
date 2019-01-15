@@ -8,4 +8,17 @@ page-battle {
     .genBox{
         position: relative;
     }
+    .personalInput{
+        width: 42px;
+    }
+    .personalInputSpan{
+        display: inline-block;
+        border-bottom: solid 0.5px #9e9e9e;
+        transition: border-bottom .1s linear;
+        margin-bottom: 1px; 
+    }
+    .blueBorder{
+        border-bottom: solid 0.5px #488aff;
+        box-shadow: 0 1px 0 0 #488aff;
+    }
 }

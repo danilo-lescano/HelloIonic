@@ -50,7 +50,13 @@
 					</ion-buttons>
 				</div>
 				<div class="genBox">
-					Initiative: <span contenteditable="true">{{creature.genInitiative}}</span>
+					Initiative:
+					<div class="personalInputSpan">
+						<input type="number" class="personalInput" value="{{creature.genInitiative}}"
+						onfocus="this.parentNode.classList.add('blueBorder')"
+						onblur="this.parentNode.classList.remove('blueBorder')"
+						(blur)="changeInitiative(creature, $event.target.value);">
+					</div>
 				</div>
 			</div>
 		</ion-item>

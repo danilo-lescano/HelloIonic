@@ -6,6 +6,7 @@ import { ICreature, CreatureService } from '../../services/creature.service';
 import { NumberPopoverComponent } from '../../components/number-popover/number-popover';
 
 export interface ICreatureGen{
+	id: number;
 	name: string;
 	initiative: string;
 	hp: string;
@@ -44,6 +45,7 @@ export class BattlePage {
 
 	toICreatureGen(creature: ICreature){
 		let aux: ICreatureGen = {
+			id: creature.id,
 			name: creature.name,
 			initiative: creature.initiative,
 			hp: creature.hp,
@@ -143,5 +145,10 @@ export class BattlePage {
 			if(creature.colorFlag = colorFlag)
 				creature.colorSpan = color;
 		}, 1000);
+	}
+
+	changeInitiative(creature: ICreatureGen, initiative){
+		creature.genInitiative = parseInt(initiative);
+		this.sortCreatures();
 	}
 }
