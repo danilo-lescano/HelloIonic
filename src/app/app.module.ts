@@ -17,6 +17,7 @@ import { MonsterPage } from '../pages/monster/monster';
 import { AddCreaturePage } from '../pages/add-creature/add-creature';
 import { PlayerPage } from '../pages/player/player';
 import { AddPartyPage } from '../pages/add-party/add-party';
+import { NumberPopoverComponent } from '../components/number-popover/number-popover';
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import { AddPartyPage } from '../pages/add-party/add-party';
     AddCreaturePage,
     AddPartyPage,
     PlayerPage,
+    NumberPopoverComponent,
   ],
   imports: [
     BrowserModule,
@@ -46,6 +48,7 @@ import { AddPartyPage } from '../pages/add-party/add-party';
     AddCreaturePage,
     AddPartyPage,
     PlayerPage,
+    NumberPopoverComponent,
   ],
   providers: [
     StatusBar,

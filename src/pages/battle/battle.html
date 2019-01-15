@@ -7,21 +7,47 @@
 
 <ion-content padding>
 	<ion-list>
-		<ion-item>add to battle modal</ion-item>
-		<ion-item *ngFor="let creature of battleCreatures">
-			<h2>
-				<ion-icon *ngIf="!creature.isPlayer" name="paw"></ion-icon>
-				<ion-icon *ngIf="creature.isPlayer" name="person"></ion-icon>
-				{{creature.name}} {{creature.genHp}} {{creature.genInitiative}}
-			</h2>
-		</ion-item>
-
 		<ion-item>
-			<ion-buttons>
-				<button ion-button block (click)="addCreature()">
-					addCreature
+			<h2>Add creatures to the battle!</h2>
+			<ion-buttons class="add-button">
+				<button ion-button round icon-only type="button" (click)="addCreature()">
+					<ion-icon name="add-circle"></ion-icon>
 				</button>
 			</ion-buttons>
+		</ion-item>
+		<ion-item>
+			<h2>
+				Base damage multiplier:
+				<span style="font-weight: bold;" ng-bind="multiplier">{{ multiplier }}</span>
+			</h2>
+			<ion-buttons class="add-button">
+				<button ion-button small (click)="presentNumberPopover($event)">
+					<ion-icon name="arrow-down"></ion-icon>
+				</button>
+			</ion-buttons>
+		</ion-item>
+		<ion-item *ngFor="let creature of battleCreatures">
+			<h2 style="font-weight: bold;">
+				<ion-icon *ngIf="!creature.isPlayer" name="paw"></ion-icon>
+				<ion-icon *ngIf="creature.isPlayer" name="person"></ion-icon>
+				{{creature.name}}
+			</h2>
+			<div>
+				<div class="genBox">
+					HP: <span contenteditable="true">{{creature.genHp}}</span>
+					<ion-buttons class="add-button">
+						<button ion-button icon-only small color="danger" type="button" (click)="damageHp(creature)">
+							<ion-icon name="remove"></ion-icon>
+						</button>
+						<button ion-button icon-only small color="secondary" type="button" (click)="healHp(creature)">
+							<ion-icon name="add"></ion-icon>
+						</button>
+					</ion-buttons>
+				</div>
+				<div class="genBox">
+					Initiative: <span contenteditable="true">{{creature.genInitiative}}</span>
+				</div>
+			</div>
 		</ion-item>
 	</ion-list>
 </ion-content>

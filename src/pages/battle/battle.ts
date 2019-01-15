@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ModalController, Modal } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ModalController, Modal, PopoverController } from 'ionic-angular';
 
 import { IParty, PartyService } from '../../services/party.service';
 import { ICreature, CreatureService } from '../../services/creature.service';
+import { NumberPopoverComponent } from '../../components/number-popover/number-popover';
 
 export interface ICreatureGen{
 	name: string;
@@ -24,9 +25,11 @@ export class BattlePage {
 	private allParties: IParty[];
 
 	private battleCreatures: ICreatureGen[] = [];
+
+	private multiplier: number = 1;
 	
 
-	constructor(public navCtrl: NavController, public navParams: NavParams, private creatureService: CreatureService, private partyService: PartyService, private modal: ModalController) {}
+	constructor(public navCtrl: NavController, public navParams: NavParams, private creatureService: CreatureService, private partyService: PartyService, private modal: ModalController, private popoverCtrl: PopoverController) {}
 
 	async ionViewWillEnter(){
 		this.allParties = await this.partyService.getParty();
@@ -45,9 +48,11 @@ export class BattlePage {
 		var dices;
 		var matchRegex = /\d*d?\d+/;
 		dices = matchRegex.exec(aux.initiative);
+		dices = dices ? dices : [];
 		for (let i = 0; i < dices.length; i++)
 			aux.genInitiative += this.calculateDice(dices[i]);
 		dices = matchRegex.exec(aux.hp);
+		dices = dices ? dices : [];
 		for (let i = 0; i < dices.length; i++)
 			aux.genHp += this.calculateDice(dices[i]);
 		return aux;
@@ -57,6 +62,7 @@ export class BattlePage {
 			return parseInt(die.trim());
 		var numbs = die.split('d');
 		var first = parseInt(numbs[0].trim());
+		first = first? first : 1;
 		var second = parseInt(numbs[1].trim());
 		var value = 0;
 		for (let i = 0; i < first; i++)
@@ -90,9 +96,26 @@ export class BattlePage {
 			if(!a.isPlayer && b.isPlayer) return -1;
 			if(a.name < b.name) return -1;
 			if(a.name > b.name) return 1;*/
-			if(a.genInitiative < b.genInitiative) return -1;
-			if(a.genInitiative > b.genInitiative) return 1;
+			if(a.genInitiative < b.genInitiative) return 1;
+			if(a.genInitiative > b.genInitiative) return -1;
 			return 0;
 		});
+	}
+
+	presentNumberPopover(myEvent) {
+		let popover = this.popoverCtrl.create(NumberPopoverComponent);
+		popover.present({
+			ev: myEvent
+		});
+		popover.onDidDismiss(number=>{
+			this.multiplier = number;
+		});
+	}
+
+	damageHp(creature: ICreatureGen){
+		creature.genHp -= this.multiplier;
+	}
+	healHp(creature: ICreatureGen){
+		creature.genHp += this.multiplier;
 	}
 }
