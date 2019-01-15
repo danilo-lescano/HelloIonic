@@ -1,13 +1,6 @@
 import { Storage } from '@ionic/storage';
 import { Injectable } from '@angular/core';
 
-export interface ICreature {
-	id: number;
-	isPlayer: boolean;
-	name: string;
-	initiative: string;
-	hp: string;
-}
 export interface IParty {/* PARTYYYYY o// \o/ \\o */
 	id: number;
 	name: string;

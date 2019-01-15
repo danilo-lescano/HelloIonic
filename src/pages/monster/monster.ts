@@ -5,13 +5,7 @@ import { CreatureService } from '../../services/creature.service';
 
 import { AddCreaturePage } from '../add-creature/add-creature';
 
-export interface ICreature {
-	id: number;
-	isPlayer: boolean;
-	name: string;
-	initiative: string;
-	hp: string;
-}
+import { ICreature } from '../../services/creature.service';
 
 @IonicPage()
 @Component({

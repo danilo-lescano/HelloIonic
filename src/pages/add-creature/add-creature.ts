@@ -4,13 +4,7 @@ import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms'
 
 import { CreatureService } from '../../services/creature.service';
 
-export interface ICreature {
-	id: number;
-	isPlayer: boolean;
-	name: string;
-	initiative: string;
-	hp: string;
-}
+import { ICreature } from '../../services/creature.service';
 
 @IonicPage()
 @Component({

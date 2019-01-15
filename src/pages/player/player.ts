@@ -1,17 +1,9 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
-import { CreatureService } from '../../services/creature.service';
+import { CreatureService, ICreature } from '../../services/creature.service';
 
 import { AddCreaturePage } from '../add-creature/add-creature';
-
-export interface ICreature {
-	id: number;
-	isPlayer: boolean;
-	name: string;
-	initiative: string;
-	hp: string;
-}
 
 @IonicPage()
 @Component({

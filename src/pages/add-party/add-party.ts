@@ -6,18 +6,8 @@ import { CreatureService } from '../../services/creature.service';
 import { PartyService } from '../../services/party.service';
 import { AddCreaturePage } from '../add-creature/add-creature';
 
-export interface ICreature {
-	id: number;
-	isPlayer: boolean;
-	name: string;
-	initiative: string;
-	hp: string;
-}
-export interface IParty {/* PARTYYYYY o// \o/ \\o */
-	id: number;
-	name: string;
-	creaturesId: number[];
-}
+import { IParty } from '../../services/party.service';
+import { ICreature } from '../../services/creature.service';
 
 @IonicPage()
 @Component({
