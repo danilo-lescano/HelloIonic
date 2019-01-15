@@ -31,16 +31,20 @@
 				<ion-icon *ngIf="!creature.isPlayer" name="paw"></ion-icon>
 				<ion-icon *ngIf="creature.isPlayer" name="person"></ion-icon>
 				{{creature.name}}
+				<span *ngIf="numberOrder[creature.id] > 1">{{ creature.numberOrder }}</span>
 			</h2>
 			<div>
 				<div class="genBox">
 					<span ion-text [color]="creature.colorSpan">
 						HP:
-						<span contenteditable="true">{{creature.genHp}}</span>
+						<span contenteditable="true">{{ creature.genHp }}</span>
 					</span>
-					<span>/{{creature.maxHp}}</span>
+					<span>/{{ creature.maxHp }}</span>
 					
 					<ion-buttons class="add-button">
+						<button *ngIf="creature.genHp <= 0" ion-button icon-only small color="dark" type="button" (click)="delCreature(creature)">
+							<ion-icon name="trash"></ion-icon>
+						</button>
 						<button ion-button icon-only small color="danger" type="button" (click)="damageHp(creature)">
 							<ion-icon name="remove"></ion-icon>
 						</button>

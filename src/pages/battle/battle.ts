@@ -16,6 +16,7 @@ export interface ICreatureGen{
 	maxHp: number;
 	colorSpan: string;
 	colorFlag: number;
+	numberOrder: number;
 }
 
 @IonicPage()
@@ -35,6 +36,7 @@ export class BattlePage {
 	private isDamage: boolean = false;
 	private isHeal: boolean = false;
 	
+	private numberOrder: number[] = [];
 
 	constructor(public navCtrl: NavController, public navParams: NavParams, private creatureService: CreatureService, private partyService: PartyService, private modal: ModalController, private popoverCtrl: PopoverController) {}
 
@@ -54,7 +56,8 @@ export class BattlePage {
 			genHp: this.calculateDices(creature.hp),
 			maxHp: this.calculateDices(creature.hp),
 			colorSpan: "",
-			colorFlag: null
+			colorFlag: null,
+			numberOrder: null
 		};
 		return aux;
 	}
@@ -91,10 +94,14 @@ export class BattlePage {
 	}
 	pushCreatures(creature? : ICreature[]){
 		if(creature){
-			for (let i = 0; i < this.allCreatures.length; i++)
-				for (let j = 0; j < creature.length; j++)
-					if(creature[j].id === this.allCreatures[i].id)
-						this.battleCreatures[this.battleCreatures.length] = this.toICreatureGen(creature[j]);
+			//for (let i = 0; i < this.allCreatures.length; i++)
+			for (let j = 0; j < creature.length; j++){
+				//if(creature[j].id === this.allCreatures[i].id){
+				if(!this.numberOrder[creature[j].id])
+					this.numberOrder[creature[j].id] = 0;
+				this.battleCreatures[this.battleCreatures.length] = this.toICreatureGen(creature[j]);
+				this.battleCreatures[this.battleCreatures.length - 1].numberOrder = ++this.numberOrder[creature[j].id];
+			}
 			this.sortCreatures();
 		}
 	}
@@ -145,6 +152,15 @@ export class BattlePage {
 			if(creature.colorFlag = colorFlag)
 				creature.colorSpan = color;
 		}, 1000);
+	}
+	delCreature(creature: ICreatureGen){
+		var flag = true;
+		for (let i = 0; flag && i < this.battleCreatures.length; i++) {
+			if(creature.id === this.battleCreatures[i].id && creature.numberOrder === this.battleCreatures[i].numberOrder){
+				flag = false;
+				this.battleCreatures.splice(i, 1);
+			}
+		}
 	}
 
 	changeInitiative(creature: ICreatureGen, initiative){
