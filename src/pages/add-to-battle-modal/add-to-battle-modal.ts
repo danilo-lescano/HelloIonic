@@ -65,19 +65,19 @@ export class AddToBattleModalPage {
 	returnThisCreatures(){
 		for (let i = 0; i < this.partiesId.length; i++) {
 			var flag = true;
-			if(this.partiesId[i] !== undefined)
-			for (let j = 0; j < this.parties.length && flag; j++){
-				if(i === this.parties[j].id){
-					flag = false;
-					for (let k = 0; k < this.parties[j].creaturesId.length; k++){
-						if(!this.creaturesId[this.parties[j].creaturesId[k]])
-							this.creaturesId[this.parties[j].creaturesId[k]] = 0;
-						this.creaturesId[this.parties[j].creaturesId[k]]++;
+			if(this.partiesId[i] !== undefined){
+				for (let j = 0; j < this.parties.length && flag; j++){
+					if(i === this.parties[j].id){
+						flag = false;
+						for (let k = 0; k < this.parties[j].creaturesId.length; k++){
+							if(!this.creaturesId[this.parties[j].creaturesId[k]])
+								this.creaturesId[this.parties[j].creaturesId[k]] = 0;
+							this.creaturesId[this.parties[j].creaturesId[k]]++;
+						}
 					}
 				}
 			}
 		}
-		console.log(this.creaturesSendBack);
 
 		for (let i = 0; i < this.creaturesId.length; i++)
 			if(this.creaturesId[i]){
@@ -89,7 +89,6 @@ export class AddToBattleModalPage {
 							this.creaturesSendBack.push(this.creatures[j]);
 					}
 			}
-		console.log(this.creaturesSendBack);
 		this.viewController.dismiss(this.creaturesSendBack);
 	}
 }
