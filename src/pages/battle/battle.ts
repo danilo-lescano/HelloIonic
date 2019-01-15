@@ -4,6 +4,15 @@ import { IonicPage, NavController, NavParams, ModalController, Modal } from 'ion
 import { IParty, PartyService } from '../../services/party.service';
 import { ICreature, CreatureService } from '../../services/creature.service';
 
+export interface ICreatureGen{
+	name: string;
+	initiative: string;
+	hp: string;
+	isPlayer: boolean,
+	genInitiative: number;
+	genHp: number;
+}
+
 @IonicPage()
 @Component({
 	selector: 'page-battle',
@@ -14,7 +23,7 @@ export class BattlePage {
 	private allCreatures: ICreature[];
 	private allParties: IParty[];
 
-	private battleCreatures: ICreature[] = [];
+	private battleCreatures: ICreatureGen[] = [];
 	
 
 	constructor(public navCtrl: NavController, public navParams: NavParams, private creatureService: CreatureService, private partyService: PartyService, private modal: ModalController) {}
@@ -22,6 +31,37 @@ export class BattlePage {
 	async ionViewWillEnter(){
 		this.allParties = await this.partyService.getParty();
 		this.allCreatures = await this.creatureService.getCreature();
+	}
+
+	toICreatureGen(creature: ICreature){
+		let aux: ICreatureGen = {
+			name: creature.name,
+			initiative: creature.initiative,
+			hp: creature.hp,
+			isPlayer: creature.isPlayer,
+			genHp: 0,
+			genInitiative: 0
+		};
+		var dices;
+		var matchRegex = /\d*d?\d+/;
+		dices = matchRegex.exec(aux.initiative);
+		for (let i = 0; i < dices.length; i++)
+			aux.genInitiative += this.calculateDice(dices[i]);
+		dices = matchRegex.exec(aux.hp);
+		for (let i = 0; i < dices.length; i++)
+			aux.genHp += this.calculateDice(dices[i]);
+		return aux;
+	}
+	calculateDice(die: string){
+		if(!/d/.test(die))
+			return parseInt(die.trim());
+		var numbs = die.split('d');
+		var first = parseInt(numbs[0].trim());
+		var second = parseInt(numbs[1].trim());
+		var value = 0;
+		for (let i = 0; i < first; i++)
+			value += Math.floor(Math.random() * second + 1);
+		return value;
 	}
 
 	addCreature(){
@@ -40,14 +80,18 @@ export class BattlePage {
 			for (let i = 0; i < this.allCreatures.length; i++)
 				for (let j = 0; j < creature.length; j++)
 					if(creature[j].id === this.allCreatures[i].id)
-						this.battleCreatures[this.battleCreatures.length] = creature[j];
+						this.battleCreatures[this.battleCreatures.length] = this.toICreatureGen(creature[j]);
 			this.sortCreatures();
 		}
 	}
 	sortCreatures(){
 		this.battleCreatures.sort(function(a, b){
+			/*if(a.isPlayer && !b.isPlayer) return 1;
+			if(!a.isPlayer && b.isPlayer) return -1;
 			if(a.name < b.name) return -1;
-			if(a.name > b.name) return 1;
+			if(a.name > b.name) return 1;*/
+			if(a.genInitiative < b.genInitiative) return -1;
+			if(a.genInitiative > b.genInitiative) return 1;
 			return 0;
 		});
 	}

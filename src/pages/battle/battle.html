@@ -8,9 +8,14 @@
 <ion-content padding>
 	<ion-list>
 		<ion-item>add to battle modal</ion-item>
-		<ion-item *ngFor="let creature of battleCreatures">battle creature aqui</ion-item>
+		<ion-item *ngFor="let creature of battleCreatures">
+			<h2>
+				<ion-icon *ngIf="!creature.isPlayer" name="paw"></ion-icon>
+				<ion-icon *ngIf="creature.isPlayer" name="person"></ion-icon>
+				{{creature.name}} {{creature.genHp}} {{creature.genInitiative}}
+			</h2>
+		</ion-item>
 
-		
 		<ion-item>
 			<ion-buttons>
 				<button ion-button block (click)="addCreature()">
