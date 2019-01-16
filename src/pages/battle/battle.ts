@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ModalController, Modal, PopoverController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ModalController, Modal, PopoverController, AlertController } from 'ionic-angular';
 
 import { IParty, PartyService } from '../../services/party.service';
 import { ICreature, CreatureService } from '../../services/creature.service';
@@ -38,11 +38,37 @@ export class BattlePage {
 	
 	private numberOrder: number[] = [];
 
-	constructor(public navCtrl: NavController, public navParams: NavParams, private creatureService: CreatureService, private partyService: PartyService, private modal: ModalController, private popoverCtrl: PopoverController) {}
+	constructor(public navCtrl: NavController, public navParams: NavParams, private creatureService: CreatureService, private partyService: PartyService, private modal: ModalController, private popoverCtrl: PopoverController, private alertCtrl: AlertController) {}
 
 	async ionViewWillEnter(){
 		this.allParties = await this.partyService.getParty();
 		this.allCreatures = await this.creatureService.getCreature();
+	}
+
+	async ionViewCanLeave() {
+		const shouldLeave = await this.confirmLeave();
+		return shouldLeave;
+	}
+	confirmLeave(): Promise<Boolean> {
+		let resolveLeaving;
+		const canLeave = new Promise<Boolean>(resolve => resolveLeaving = resolve);
+		const alert = this.alertCtrl.create({
+			title: 'Confirm leave',
+			message: 'You will lose all the battle track. Are you sure want to leave?',
+			buttons: [
+				{
+					text: 'No',
+					role: 'cancel',
+					handler: () => resolveLeaving(false)
+				},
+				{
+					text: 'Yes',
+					handler: () => resolveLeaving(true)
+				}
+		  	]
+		});
+		alert.present();
+		return canLeave;
 	}
 
 	toICreatureGen(creature: ICreature){
