@@ -33,3 +33,4 @@ ionic serve
 ## Authors
 
 * **Danilo Lima** - *Initial work* - [DaniloCaverna](https://github.com/danilocaverna)
+* **Thaís Lescano** - *Art* - [ThaisLescano](https://github.com/thaislescano)
