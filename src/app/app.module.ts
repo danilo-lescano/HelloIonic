@@ -58,7 +58,7 @@ import { AppUpdate } from '@ionic-native/app-update';
     PartyService,
     CreatureService,
     Storage,
-    AppUpdate
+    AppUpdate,
   ]
 })
 export class AppModule {}

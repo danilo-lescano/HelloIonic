@@ -7,22 +7,23 @@ import { AppUpdate } from '@ionic-native/app-update';
 import { MenuPage } from '../pages/menu/menu';
 
 @Component({
-  templateUrl: 'app.html'
+  	templateUrl: 'app.html'
 })
 export class MyApp {
-  rootPage:any = MenuPage;
+	rootPage:any = MenuPage;
 
-  constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen,private appUpdate: AppUpdate) {
-    platform.ready().then(() => {
-      // Okay, so the platform is ready and our plugins are available.
-      // Here you can do any higher level native things you might need.
-      statusBar.styleDefault();
-      splashScreen.hide();
+	constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen,private appUpdate: AppUpdate) {
+		platform.ready().then(() => {
+			// Okay, so the platform is ready and our plugins are available.
+			// Here you can do any higher level native things you might need.
+			statusBar.styleDefault();
+			splashScreen.hide();
 
-      //update
-      const updateUrl = 'https://danilocaverna.github.io/BattleAssistant/update.xml';
-      this.appUpdate.checkAppUpdate(updateUrl).then(() => { console.log('Update available') });
-    });
-  }
+			//update
+			const updateUrl = 'https://danilocaverna.github.io/BattleAssistant/update.xml';
+			if(!platform.is('core') && !platform.is('mobileweb'))
+				this.appUpdate.checkAppUpdate(updateUrl).then(() => { console.log('Update available') });
+		});
+	}
 }
 
