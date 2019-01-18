@@ -18,19 +18,15 @@ export class MyApp {
 			// Here you can do any higher level native things you might need.
 			statusBar.styleDefault();
 			splashScreen.hide();
-			this.x();
+			this.update();
 		});
 	}
 
-	x(){
+	update(){
 		//update
 		const updateUrl = 'https://danilocaverna.github.io/BattleAssistant/update.xml';
-		console.log('core ' + this.platform.is('core'))
-		console.log('mobileweb ' + this.platform.is('mobileweb'))
-		console.log('android ' + this.platform.is('android'))
-
 		if(!this.platform.is('core') && !this.platform.is('mobileweb') && this.platform.is('android'))
-			alert();//this.appUpdate.checkAppUpdate(updateUrl).then(() => { console.log('Update available') });
+			this.appUpdate.checkAppUpdate(updateUrl).then(() => { console.log('Update available') });
 	}
 }
 

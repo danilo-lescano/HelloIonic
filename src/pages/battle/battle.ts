@@ -149,7 +149,7 @@ export class BattlePage {
 			ev: myEvent
 		});
 		popover.onDidDismiss(number=>{
-			this.multiplier = number;
+			this.multiplier = number || 1;
 		});
 	}
 
