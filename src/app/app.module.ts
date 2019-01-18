@@ -18,6 +18,7 @@ import { AddCreaturePage } from '../pages/add-creature/add-creature';
 import { PlayerPage } from '../pages/player/player';
 import { AddPartyPage } from '../pages/add-party/add-party';
 import { NumberPopoverComponent } from '../components/number-popover/number-popover';
+import { AppUpdate } from '@ionic-native/app-update';
 
 @NgModule({
   declarations: [
@@ -56,7 +57,8 @@ import { NumberPopoverComponent } from '../components/number-popover/number-popo
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     PartyService,
     CreatureService,
-    Storage
+    Storage,
+    AppUpdate
   ]
 })
 export class AppModule {}
