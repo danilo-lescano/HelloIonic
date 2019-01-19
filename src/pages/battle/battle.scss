@@ -10,8 +10,13 @@ page-battle {
     }
     .personalInput{
         width: 42px;
-        //filter: none !important;
-        //text-align: left;
+        border: none;
+        background-image: none;
+        background-color: transparent;
+        -webkit-box-shadow: none;
+        -moz-box-shadow: none;
+        box-shadow: none;
+        outline: none;
     }
     .personalInputSpan{
         display: inline-block;

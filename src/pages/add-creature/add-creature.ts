@@ -49,7 +49,7 @@ export class AddCreaturePage {
 		this.creatureService.addCreature(creature);
 		this.creature = {
 			id: null,
-			isPlayer: false,
+			isPlayer: this.creature.isPlayer,
 			name: null,
 			initiative: "1d20",
 			hp: null
