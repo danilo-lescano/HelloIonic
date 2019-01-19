@@ -1,9 +1,10 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
-import { SplashScreen } from '@ionic-native/splash-screen';
-import { StatusBar } from '@ionic-native/status-bar';
 import { IonicStorageModule } from '@ionic/storage';
+import { StatusBar } from '@ionic-native/status-bar';
+import { AppUpdate } from '@ionic-native/app-update';
+import { SplashScreen } from '@ionic-native/splash-screen';
 
 import { PartyService } from '../services/party.service';
 import { CreatureService } from '../services/creature.service';
@@ -14,11 +15,9 @@ import { MenuPage } from '../pages/menu/menu';
 import { BattlePage } from '../pages/battle/battle';
 import { PartyPage } from '../pages/party/party';
 import { MonsterPage } from '../pages/monster/monster';
-import { AddCreaturePage } from '../pages/add-creature/add-creature';
 import { PlayerPage } from '../pages/player/player';
 import { AddPartyPage } from '../pages/add-party/add-party';
 import { NumberPopoverComponent } from '../components/number-popover/number-popover';
-import { AppUpdate } from '@ionic-native/app-update';
 
 @NgModule({
   declarations: [
@@ -28,7 +27,6 @@ import { AppUpdate } from '@ionic-native/app-update';
     BattlePage,
     PartyPage,
     MonsterPage,
-    AddCreaturePage,
     AddPartyPage,
     PlayerPage,
     NumberPopoverComponent,
@@ -46,7 +44,6 @@ import { AppUpdate } from '@ionic-native/app-update';
     BattlePage,
     PartyPage,
     MonsterPage,
-    AddCreaturePage,
     AddPartyPage,
     PlayerPage,
     NumberPopoverComponent,

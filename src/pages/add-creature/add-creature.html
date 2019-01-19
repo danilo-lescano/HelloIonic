@@ -1,6 +1,9 @@
 <ion-header>
 	<ion-navbar>
 		<ion-buttons end>
+			<button ion-button icon-only (click)="dismissModal()">
+				<ion-icon name="arrow-back"></ion-icon>
+			</button>
 			<button ion-button icon-only (click)="trashThisCreature()">
 				<ion-icon name="trash"></ion-icon>
 			</button>
@@ -43,5 +46,6 @@
 			<ion-toggle formControlName="isPlayer" [(ngModel)]="creature.isPlayer"></ion-toggle>
 		</ion-item>
         <button ion-button block type="submit" [disabled]="!creatureForm.valid">Save Creature</button>
+        <button ion-button block type="button" (click)="saveAndContinue(creature)" [disabled]="!creatureForm.valid">Save & Continue</button>
     </form>
 </ion-content>

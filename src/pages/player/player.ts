@@ -1,9 +1,7 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, ModalController, Modal } from 'ionic-angular';
 
 import { CreatureService, ICreature } from '../../services/creature.service';
-
-import { AddCreaturePage } from '../add-creature/add-creature';
 
 @IonicPage()
 @Component({
@@ -13,9 +11,12 @@ import { AddCreaturePage } from '../add-creature/add-creature';
 export class PlayerPage {
     private creatures: ICreature[] = [];
 
- 	constructor(public navCtrl: NavController, public navParams: NavParams, private creatureService: CreatureService) {}
+ 	constructor(private modal: ModalController, private creatureService: CreatureService) {}
 
-   async ionViewWillEnter(){
+	ionViewWillEnter(){
+		this.loadCreatures();
+	}
+	async loadCreatures(){
 		this.creatures = await this.creatureService.getCreature();
 		this.creatures.sort(function(a, b){
 			if(a.name < b.name) return -1;
@@ -24,10 +25,14 @@ export class PlayerPage {
 		});
 	}
 	renderAddCreaturePage(creature?: ICreature){
-		var isPlayer = true;
+		var isPlayer: boolean = true;
+		var modalView: Modal;
 		if(creature != null)
-			this.navCtrl.push(AddCreaturePage, { creature, isPlayer });
+			modalView = this.modal.create("AddCreaturePage", { creature, isPlayer });
 		else
-			this.navCtrl.push(AddCreaturePage, { isPlayer });
+			modalView = this.modal.create("AddCreaturePage", { isPlayer });
+
+		modalView.present();
+		modalView.onDidDismiss(()=>this.loadCreatures());
 	}
 }

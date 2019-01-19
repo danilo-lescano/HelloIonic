@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavParams, ViewController } from 'ionic-angular';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 
 import { CreatureService } from '../../services/creature.service';
@@ -15,15 +15,14 @@ export class AddCreaturePage {
 	private creature: ICreature;
 	private creatureForm: any;
 
-	constructor(public navCtrl: NavController, public navParams: NavParams, private creatureService: CreatureService, private formBuilder: FormBuilder) {
-		this.loadCreature().then(()=>{
-			this.creatureForm = formBuilder.group({
-				id: ['', Validators.compose([])],
-				name: ['', Validators.compose([Validators.required])],
-				initiative: ['', Validators.compose([Validators.pattern(/\d*d?\d+/g)])],
-				hp: ['', Validators.compose([Validators.pattern(/\d*d?\d+/g)])],
-				isPlayer: ['', Validators.compose([])],
-			});
+	constructor(private viewController: ViewController, private navParams: NavParams, private creatureService: CreatureService, private formBuilder: FormBuilder) {
+		this.loadCreature();
+		this.creatureForm = formBuilder.group({
+			id: ['', Validators.compose([])],
+			name: ['', Validators.compose([Validators.required])],
+			initiative: ['', Validators.compose([Validators.pattern(/\d*d?\d+/g)])],
+			hp: ['', Validators.compose([Validators.pattern(/\d*d?\d+/g)])],
+			isPlayer: ['', Validators.compose([])],
 		});
 	}
 
@@ -40,16 +39,28 @@ export class AddCreaturePage {
 			}
 		}
 		this.creature.isPlayer = isPlayer ? isPlayer : this.creature.isPlayer;
-		return;
   	}
 
 	onAddCreature(creature: ICreature){
 		this.creatureService.addCreature(creature);
-		this.navCtrl.pop();
+		this.viewController.dismiss();
+	}
+	saveAndContinue(creature: ICreature){
+		this.creatureService.addCreature(creature);
+		this.creature = {
+			id: null,
+			isPlayer: false,
+			name: null,
+			initiative: "1d20",
+			hp: null
+		}
 	}
 	trashThisCreature(){
 		if(this.creature.id != null)
 			this.creatureService.delCreature(this.creature);
-		this.navCtrl.pop();
+		this.viewController.dismiss();
+	}
+	dismissModal(){
+		this.viewController.dismiss();
 	}
 }
