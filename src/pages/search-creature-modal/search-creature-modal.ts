@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavParams, ViewController} from 'ionic-angular';
-import { ICreature } from '../../services/creature.service';
+import { IonicPage, NavParams, ViewController, Modal, ModalController} from 'ionic-angular';
+import { ICreature, CreatureService } from '../../services/creature.service';
 
 @IonicPage()
 @Component({
@@ -15,10 +15,13 @@ export class SearchCreatureModalPage {
 	private isMonster: boolean = true;
 	private nameSearch: string = "";
 
-	constructor(private navParams: NavParams, private viewController: ViewController) {}
+	constructor(private navParams: NavParams, private viewController: ViewController, private modal: ModalController, private creatureService: CreatureService) {}
 	
 	async ionViewWillEnter(){
-		this.creatures = await this.navParams.get("creatures").slice();
+		this.loadData();
+	}
+	async loadData(){
+		this.creatures = await this.creatureService.getCreature();
 		this.creatures.sort(function(a, b){
 			if(a.name < b.name) return -1;
 			if(a.name > b.name) return 1;
@@ -51,5 +54,11 @@ export class SearchCreatureModalPage {
 		if(this.creaturesAdded[creature.id] === undefined)
 			this.creaturesAdded[creature.id] = 0;
 		this.creaturesAdded[creature.id]++;
+	}
+
+	addCreatureModal(){
+		var modalView: Modal = this.modal.create("AddCreaturePage");
+		modalView.present();
+		modalView.onDidDismiss(()=>this.loadData());
 	}
 }

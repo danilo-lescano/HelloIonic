@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavParams, ViewController } from 'ionic-angular';
+import { IonicPage, NavParams, ViewController, Modal, ModalController } from 'ionic-angular';
 
-import { IParty } from '../../services/party.service';
-import { ICreature } from '../../services/creature.service';
+import { IParty, PartyService } from '../../services/party.service';
+import { ICreature, CreatureService } from '../../services/creature.service';
 
 @IonicPage()
 @Component({
@@ -24,7 +24,7 @@ export class AddToBattleModalPage {
 	private isMonster: boolean = true;
 	private isParty: boolean = true;
 
-	constructor(private navParams: NavParams, private viewController: ViewController) {}
+	constructor(private navParams: NavParams, private viewController: ViewController, private modal: ModalController, private creatureService: CreatureService, private partyService: PartyService) {}
 	  
 	async ionViewWillEnter(){
 		this.creatures = await this.navParams.get("creatures").slice().sort(function(a, b){
@@ -90,5 +90,25 @@ export class AddToBattleModalPage {
 					}
 			}
 		this.viewController.dismiss(this.creaturesSendBack);
+	}
+
+	addCreatureModal(){
+		var modalView: Modal = this.modal.create("AddCreaturePage");
+		modalView.present();
+		modalView.onDidDismiss(()=>this.reloadData());
+	}
+	async reloadData(){
+		this.creatures = await this.creatureService.getCreature();
+		this.creatures.sort(function(a, b){
+			if(a.name < b.name) return -1;
+			if(a.name > b.name) return 1;
+			return 0;
+		});
+		this.parties = await this.partyService.getParty();
+		this.parties.sort(function(a, b){
+			if(a.name < b.name) return -1;
+			if(a.name > b.name) return 1;
+			return 0;
+		});
 	}
 }

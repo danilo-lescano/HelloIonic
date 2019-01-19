@@ -14,7 +14,15 @@
 
 
 <ion-content padding>
-	<p>Add creatures, players, npcs or parties to the battle.</p>
+	<h4>Add creatures, players, npcs or parties to the battle.</h4>
+	<ion-item>
+		<h2>No creatures? Create some!</h2>
+		<ion-buttons class="add-button">
+			<button ion-button round icon-only type="button" (click)="addCreatureModal()">
+				<ion-icon name="add-circle"></ion-icon>
+			</button>
+		</ion-buttons>
+	</ion-item>
 	<ion-item>
 		<ion-label>Name</ion-label>
 		<ion-input type="string" [(ngModel)]="nameSearch"></ion-input>
@@ -31,6 +39,25 @@
 		<ion-label>Partys</ion-label>
 		<ion-checkbox [(ngModel)]="isParty"></ion-checkbox>
 	</ion-item>
+
+	<ng-container *ngFor="let party of parties">
+		<ion-item *ngIf="isParty && (nameSearch == '' || party.name.toLowerCase().includes(nameSearch.toLowerCase()))">
+			<h2>
+				<ion-icon name="people"></ion-icon>
+				{{party.name}}
+			</h2>
+			<ion-buttons class="add-button">
+				<span *ngIf="partiesId[party.id] !== undefined">{{ partiesId[party.id] }}</span>
+				<button ion-button icon-only small type="button" (click)="removeParty(party)">
+					<ion-icon name="remove"></ion-icon>
+				</button>
+				<button ion-button icon-only small type="button" (click)="addParty(party)">
+					<ion-icon name="add"></ion-icon>
+				</button>
+			</ion-buttons>
+		</ion-item>
+	</ng-container>
+
 	<ng-container *ngFor="let creature of creatures">
 		<ion-item *ngIf="((creature.isPlayer && isPlayer) || (!creature.isPlayer && isMonster)) && (nameSearch == '' || creature.name.toLowerCase().includes(nameSearch.toLowerCase()))">
 			<h2>
@@ -50,23 +77,6 @@
 		</ion-item>
 	</ng-container>
 
-	<ng-container *ngFor="let party of parties">
-		<ion-item *ngIf="isParty && (nameSearch == '' || party.name.toLowerCase().includes(nameSearch.toLowerCase()))">
-			<h2>
-				<ion-icon name="people"></ion-icon>
-				{{party.name}}
-			</h2>
-			<ion-buttons class="add-button">
-				<span *ngIf="partiesId[party.id] !== undefined">{{ partiesId[party.id] }}</span>
-				<button ion-button icon-only small type="button" (click)="removeParty(party)">
-					<ion-icon name="remove"></ion-icon>
-				</button>
-				<button ion-button icon-only small type="button" (click)="addParty(party)">
-					<ion-icon name="add"></ion-icon>
-				</button>
-			</ion-buttons>
-		</ion-item>
-	</ng-container>
 	<ion-item>
 		<ion-buttons>
 			<button ion-button block (click)="returnThisCreatures()">
