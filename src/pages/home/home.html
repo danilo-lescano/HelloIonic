@@ -12,14 +12,37 @@
 </ion-header>
 
 <ion-content padding>
-    <p>This is a Battle Assistant for DnD encounters!</p>
-    <P>You can access the menu to create a catalogue of monster and team parties to generate fast battles.</P><br>
-    <p><ion-icon name="people"></ion-icon> - Parties: here you can create the party of your players or a fierceful wolf pack for the next encounter.</p><br>
-    <p><ion-icon name="paw"></ion-icon> - Monster: here you can create the patterns for some creatures or NPCs.</p>
-    <p>Example: a beholder has 11d8 + 44 hp, or you also can set an static value for this particular monster. Besides that the creature has a bonus of +6 on its initiative (improved initiative and dexterity) that can be rolled automatic when placed on the battle, that likewise can be set as static if you wish.</p><br>
+    <ion-list>
+        <ion-item>
+            <h2>Ignos Party</h2>
+            <ion-buttons class="add-button">
+                <button ion-button icon-only>
+                    <span class="littlePeople">
+                        <ion-icon name="people"></ion-icon>
+                    </span>
+                </button>
+            </ion-buttons>
+        </ion-item>
 
-    <button ion-button icon-only block (click)="toBattlePage()">
-        START BATTLE!!!
-    </button>
+        <ion-item>
+            <h2>New party</h2>
+            <ion-buttons class="add-button">
+                <button ion-button outline icon-only>
+                    <span class="littlePeople littlePeopleAdd">
+                        <ion-icon name="people"></ion-icon>
+                    </span>
+                    <span class="litteAdd">
+                        <ion-icon name="add"></ion-icon>
+                    </span>
+                </button>
+            </ion-buttons>
+        </ion-item>
+    </ion-list>
+
     
+    <ion-buttons>
+        <button ion-button block (click)="toBattlePage()">
+            start battle
+        </button>
+    </ion-buttons>
 </ion-content>

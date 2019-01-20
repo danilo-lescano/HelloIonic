@@ -4,6 +4,7 @@ import { IonicPage, NavController, NavParams, ModalController, Modal, PopoverCon
 import { IParty, PartyService } from '../../services/party.service';
 import { ICreature, CreatureService } from '../../services/creature.service';
 import { NumberPopoverComponent } from '../../components/number-popover/number-popover';
+import { Localization } from './localization';
 
 export interface ICreatureGen{
 	id: number;
@@ -38,7 +39,9 @@ export class BattlePage {
 	
 	private numberOrder: number[] = [];
 
-	constructor(public navCtrl: NavController, public navParams: NavParams, private creatureService: CreatureService, private partyService: PartyService, private modal: ModalController, private popoverCtrl: PopoverController, private alertCtrl: AlertController) {}
+	constructor(public navCtrl: NavController, public navParams: NavParams, private creatureService: CreatureService, private partyService: PartyService, private modal: ModalController, private popoverCtrl: PopoverController, private alertCtrl: AlertController, private msg: Localization) {
+		console.log(msg.x);
+	}
 
 	async ionViewWillEnter(){
 		this.allParties = await this.partyService.getParty();

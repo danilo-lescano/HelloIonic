@@ -19,6 +19,9 @@ import { PlayerPage } from '../pages/player/player';
 import { AddPartyPage } from '../pages/add-party/add-party';
 import { NumberPopoverComponent } from '../components/number-popover/number-popover';
 
+import { Localization as HomeLocalization } from '../pages/home/localization';
+import { Localization as BattleLocalization } from '../pages/battle/localization';
+
 @NgModule({
   declarations: [
     MyApp,
@@ -56,6 +59,8 @@ import { NumberPopoverComponent } from '../components/number-popover/number-popo
     CreatureService,
     Storage,
     AppUpdate,
+    HomeLocalization,
+    BattleLocalization
   ]
 })
 export class AppModule {}
