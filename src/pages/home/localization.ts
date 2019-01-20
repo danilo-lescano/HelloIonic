@@ -26,6 +26,28 @@ export class Localization {
                 "New Party",
                 "Novo Grupo"
             ]
+        },
+        {
+            name: "partyName",
+            values: [
+                "Party Name",
+                "Nome do Grupo"
+            ]
+        },
+        {
+            name: "cancel",
+            values: [
+                "Cancel",
+                "Cancelar"
+            ]
+        },
+        {
+            name: "ok",
+            values: [
+                "O.K.",
+                "O.K."
+            ]
         }
+        
     ];
 }

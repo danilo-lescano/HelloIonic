@@ -8,4 +8,9 @@ page-search-creature-modal {
     .floatRight{
         float: right;
     }
+    .bottomFixed{
+        position: sticky;
+        bottom: 0;
+        right: 0;
+    }
 }

@@ -15,6 +15,8 @@ export class SearchCreatureModalPage {
 	private isMonster: boolean = true;
 	private nameSearch: string = "";
 
+	private numberOfCreatures: number = 0;
+
 	constructor(private navParams: NavParams, private viewController: ViewController, private modal: ModalController, private creatureService: CreatureService) {}
 	
 	async ionViewWillEnter(){
@@ -47,13 +49,16 @@ export class SearchCreatureModalPage {
 		this.viewController.dismiss(this.creaturesSendBack);
 	}
 	removeCreature(creature: ICreature){
-		if(this.creaturesAdded[creature.id])
+		if(this.creaturesAdded[creature.id]){
 			this.creaturesAdded[creature.id]--;
+			this.numberOfCreatures--;
+		}
 	}
 	addCreature(creature: ICreature){
 		if(this.creaturesAdded[creature.id] === undefined)
 			this.creaturesAdded[creature.id] = 0;
 		this.creaturesAdded[creature.id]++;
+		this.numberOfCreatures++;
 	}
 
 	addCreatureModal(){

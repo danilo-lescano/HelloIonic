@@ -2,10 +2,7 @@
 	<ion-navbar>
 		<ion-title>Add To Party</ion-title>
 		<ion-buttons end>
-			<button ion-button large (click)="addThisCreatures()">
-				<ion-icon name="add-circle"></ion-icon>
-			</button>
-			<button ion-button large (click)="closeMe()">
+			<button ion-button (click)="closeMe()">
 				<ion-icon name="close-circle"></ion-icon>
 			</button>
 		</ion-buttons>
@@ -53,11 +50,10 @@
 			</ion-buttons>
 		</ion-item>
 	</ng-container>
-	<ion-item>
-		<ion-buttons>
-			<button ion-button block (click)="addThisCreatures()">
-				Add this creatures!
-			</button>
-		</ion-buttons>
-	</ion-item>
+
+	<ion-buttons [class]="numberOfCreatures > 0 ? 'bottomFixed' : ''">
+		<button ion-button round (click)="addThisCreatures()">
+			<ion-icon name="add"></ion-icon>
+		</button>
+	</ion-buttons>
 </ion-content>

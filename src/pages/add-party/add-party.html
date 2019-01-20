@@ -1,6 +1,9 @@
 <ion-header>
 	<ion-navbar>
 		<ion-buttons end>
+			<button ion-button icon-only type="button" (click)="addCreature()">
+				<ion-icon name="add-circle"></ion-icon>
+			</button>
 			<button ion-button icon-only (click)="trashThisParty()">
 				<ion-icon name="trash"></ion-icon>
 			</button>
@@ -23,14 +26,6 @@
 			<p style="color: red;">Sorry, field name is required!</p>
 		</ion-item>
 
-		<ion-item>
-			<h2>Party List</h2>
-			<ion-buttons class="add-button">
-				<button ion-button round icon-only type="button" (click)="addCreature()">
-					<ion-icon name="add-circle"></ion-icon>
-				</button>
-			</ion-buttons>
-		</ion-item>
 		<ng-container *ngFor="let creature of creatures">
 			<ion-item *ngIf="creature">
 				<h2>{{creature.name}}</h2>
