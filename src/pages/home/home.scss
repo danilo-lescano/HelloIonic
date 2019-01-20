@@ -1,16 +1,11 @@
 page-home {
     .litteAdd{
+        font-size: 0.8em;
         position: absolute;
-        font-size: 0.5em;
-        transform: translateX(50%);
+        transform: translateX(100%);
     }
     .littlePeople{
-        font-size: 0.7em;
-        margin: 0 auto;
-        padding: 0;
-    }
-    .littlePeopleAdd{
-        transform: translateX(-5%);
+        transform: translateX(-20%);
     }
     .add-button{
         top: 50%;

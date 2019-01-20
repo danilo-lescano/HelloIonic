@@ -6,29 +6,30 @@
             </button>
         </ion-buttons>
         <ion-title>
-            Battle Assistant
+            {{ msg.title }}
         </ion-title>
     </ion-navbar>
 </ion-header>
 
 <ion-content padding>
     <ion-list>
-        <ion-item>
-            <h2>Ignos Party</h2>
+        <ion-item *ngFor="let party of parties">
+            <h2>{{ party.name }}</h2>
             <ion-buttons class="add-button">
-                <button ion-button icon-only>
-                    <span class="littlePeople">
-                        <ion-icon name="people"></ion-icon>
-                    </span>
+                <button ion-button>
+                    <ion-icon name="create"></ion-icon>
+                </button>
+                <button ion-button>
+                    <ion-icon name="custom-cross-sword"></ion-icon>
                 </button>
             </ion-buttons>
         </ion-item>
 
         <ion-item>
-            <h2>New party</h2>
+            <h2>{{ msg.newPaty }}</h2>
             <ion-buttons class="add-button">
-                <button ion-button outline icon-only>
-                    <span class="littlePeople littlePeopleAdd">
+                <button ion-button outline>
+                    <span class="littlePeople">
                         <ion-icon name="people"></ion-icon>
                     </span>
                     <span class="litteAdd">

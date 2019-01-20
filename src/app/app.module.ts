@@ -8,6 +8,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 
 import { PartyService } from '../services/party.service';
 import { CreatureService } from '../services/creature.service';
+import { LanguageService } from "../services/language.service";
 
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
@@ -57,6 +58,7 @@ import { Localization as BattleLocalization } from '../pages/battle/localization
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     PartyService,
     CreatureService,
+    LanguageService,
     Storage,
     AppUpdate,
     HomeLocalization,
