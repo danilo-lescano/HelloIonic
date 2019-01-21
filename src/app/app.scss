@@ -30,4 +30,7 @@ ion-icon {
 	&[class*="custom-cross-sword"] {
 		mask-image: url(../assets/custom/cross-sword.svg);
 	}
+	&[class*="custom-paws"] {
+		mask-image: url(../assets/custom/paws.svg);
+	}
 }

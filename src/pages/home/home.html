@@ -13,20 +13,21 @@
 
 <ion-content padding>
     <ion-list>
-        <ion-card *ngFor="let party of parties">
-            <ion-card-header>{{ party.name }}</ion-card-header>
-            <ion-card-content>
-                <ion-buttons>
-                    <button ion-button (click)="renderAddPartyPage(party)">
-                        <ion-icon name="create"></ion-icon>
-                    </button>
-                    <button ion-button (click)="toBattlePage(party)">
-                        <ion-icon name="custom-cross-sword"></ion-icon>
-                    </button>
-                </ion-buttons>
-            </ion-card-content>
-        </ion-card>
-
+        <ng-container *ngFor="let party of parties">
+            <ion-card *ngIf="!party.isEncounter">
+                <ion-card-header>{{ party.name }}</ion-card-header>
+                <ion-card-content>
+                    <ion-buttons>
+                        <button ion-button (click)="renderAddPartyPage(party)">
+                            <ion-icon name="create"></ion-icon>
+                        </button>
+                        <button ion-button (click)="toBattlePage(party)">
+                            <ion-icon name="custom-cross-sword"></ion-icon>
+                        </button>
+                    </ion-buttons>
+                </ion-card-content>
+            </ion-card>
+        </ng-container>
         <ion-card>
             <ion-card-header color="primary">{{ msg.newPaty }}</ion-card-header>
             <ion-card-content>

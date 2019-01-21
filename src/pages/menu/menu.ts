@@ -3,12 +3,13 @@ import { IonicPage, NavController, NavParams, Nav } from 'ionic-angular';
 
 import { HomePage } from '../home/home';
 import { CreaturePage } from '../creature/creature';
+import { EncounterPage } from '../encounter/encounter';
 
 export interface PageInterface {
 	title: string;
 	pageName: string;
 	pageComponent?: any;
-	isPlayer: boolean;
+	isPlayer?: boolean;
 	icon: string;
 }
 
@@ -25,6 +26,7 @@ export class MenuPage {
 	pages: PageInterface[] = [
 		{ title: 'Bestiary', pageName: 'CreaturePage', pageComponent: CreaturePage, isPlayer: false, icon: 'paw' },
 		{ title: 'Player', pageName: 'CreaturePage', pageComponent: CreaturePage, isPlayer: true, icon: 'person' },
+		{ title: 'Encounter Groups', pageName: 'Encounter', pageComponent: EncounterPage, icon: 'custom-paws' },
 	];
 
 	constructor(public navCtrl: NavController) { }

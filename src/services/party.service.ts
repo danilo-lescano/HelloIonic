@@ -3,7 +3,8 @@ import { Injectable } from '@angular/core';
 
 export interface IParty {/* PARTYYYYY o// \o/ \\o */
 	id: number;
-	name: string;
+    name: string;
+    isEncounter: boolean;
 	creaturesId: number[];
 }
 

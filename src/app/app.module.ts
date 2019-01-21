@@ -16,12 +16,14 @@ import { MenuPage } from '../pages/menu/menu';
 import { BattlePage } from '../pages/battle/battle';
 import { AddPartyPage } from '../pages/add-party/add-party';
 import { CreaturePage } from '../pages/creature/creature';
+import { EncounterPage } from '../pages/encounter/encounter';
 
 import { NumberPopoverComponent } from '../components/number-popover/number-popover';
 import { NewpartyPopoverComponent } from '../components/newparty-popover/newparty-popover';
 
 import { Localization as HomeLocalization } from '../pages/home/localization';
 import { Localization as BattleLocalization } from '../pages/battle/localization';
+import { Localization as EncounterLocalization } from '../pages/encounter/localization';
 import { Localization as NewpartyPopoverLocalization } from '../components/newparty-popover/localization';
 
 @NgModule({
@@ -34,6 +36,7 @@ import { Localization as NewpartyPopoverLocalization } from '../components/newpa
     NumberPopoverComponent,
     NewpartyPopoverComponent,
     CreaturePage,
+    EncounterPage,
   ],
   imports: [
     BrowserModule,
@@ -50,6 +53,7 @@ import { Localization as NewpartyPopoverLocalization } from '../components/newpa
     NumberPopoverComponent,
     NewpartyPopoverComponent,
     CreaturePage,
+    EncounterPage,
   ],
   providers: [
     StatusBar,
@@ -60,9 +64,7 @@ import { Localization as NewpartyPopoverLocalization } from '../components/newpa
     LanguageService,
     Storage,
     AppUpdate,
-    HomeLocalization,
-    BattleLocalization,
-    NewpartyPopoverLocalization,
+    HomeLocalization, BattleLocalization, EncounterLocalization, NewpartyPopoverLocalization, 
   ]
 })
 export class AppModule {}

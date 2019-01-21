@@ -1,5 +1,10 @@
 <ion-header>
 	<ion-navbar>
+		<ion-buttons end>
+			<button ion-button icon-only (click)="addCreature()">
+				<ion-icon name="add-circle"></ion-icon>
+			</button>
+		</ion-buttons>
 		<ion-title>Battle</ion-title>
 	</ion-navbar>
 </ion-header>
@@ -7,14 +12,6 @@
 
 <ion-content padding>
 	<ion-list>
-		<ion-item>
-			<h2>Add creatures to the battle!</h2>
-			<ion-buttons class="add-button">
-				<button ion-button round icon-only type="button" (click)="addCreature()">
-					<ion-icon name="add-circle"></ion-icon>
-				</button>
-			</ion-buttons>
-		</ion-item>
 		<ion-item>
 			<h2>
 				Base damage multiplier:
@@ -42,10 +39,7 @@
 					<span>/{{ creature.maxHp }}</span>
 					
 					<ion-buttons class="add-button">
-						<button *ngIf="creature.genHp <= 0" [disabled]="false" ion-button icon-only small color="dark" type="button" (click)="delCreature(creature)">
-							<ion-icon name="trash"></ion-icon>
-						</button>
-						<button *ngIf="creature.genHp >  0" [disabled]="true" ion-button icon-only small color="dark" type="button" (click)="delCreature(creature)">
+						<button [disabled]="creature.genHp > 0" ion-button icon-only small color="dark" type="button" (click)="delCreature(creature)">
 							<ion-icon name="trash"></ion-icon>
 						</button>
 						<button ion-button icon-only small color="danger" type="button" (click)="damageHp(creature)">

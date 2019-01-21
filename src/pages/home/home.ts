@@ -59,6 +59,7 @@ export class HomePage {
 		this.renderAddPartyPage({
 			id: null,
 			name: partyName,
+			isEncounter: false,
 			creaturesId: []
 		});
 	}

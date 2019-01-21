@@ -1,0 +1,44 @@
+<ion-header>
+	<ion-navbar>
+		<ion-buttons start>
+			<button ion-button menuToggle>
+				<ion-icon name="menu"></ion-icon>
+			</button>
+		</ion-buttons>
+		<ion-title>
+			{{ msg.title }}
+		</ion-title>
+	</ion-navbar>
+</ion-header>
+
+<ion-content padding>
+	<ion-list>
+		<ng-container *ngFor="let party of parties">
+			<ion-card *ngIf="party.isEncounter">
+				<ion-card-header>{{ party.name }}</ion-card-header>
+				<ion-card-content>
+					<ion-buttons>
+						<button ion-button (click)="renderAddPartyPage(party)">
+							<ion-icon name="create"></ion-icon>
+						</button>
+					</ion-buttons>
+				</ion-card-content>
+			</ion-card>
+		</ng-container>
+		<ion-card>
+			<ion-card-header color="primary">{{ msg.newPaty }}</ion-card-header>
+			<ion-card-content>
+				<ion-buttons>
+					<button ion-button outline block (click)="promptPartyName()">
+						<span class="littlePeople">
+							<ion-icon name="people"></ion-icon>
+						</span>
+						<span class="litteAdd">
+							<ion-icon name="add"></ion-icon>
+						</span>
+					</button>
+				</ion-buttons>
+			</ion-card-content>
+		</ion-card>
+	</ion-list>
+</ion-content>

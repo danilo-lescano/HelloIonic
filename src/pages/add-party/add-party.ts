@@ -18,6 +18,7 @@ export class AddPartyPage {
 	private party: IParty = {
 		id: null,
 		name: '',
+		isEncounter: true,
 		creaturesId: [],
 	};
 	private creatures: ICreature[] = [];
