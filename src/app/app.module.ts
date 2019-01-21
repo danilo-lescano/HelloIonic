@@ -18,10 +18,13 @@ import { PartyPage } from '../pages/party/party';
 import { MonsterPage } from '../pages/monster/monster';
 import { PlayerPage } from '../pages/player/player';
 import { AddPartyPage } from '../pages/add-party/add-party';
+
 import { NumberPopoverComponent } from '../components/number-popover/number-popover';
+import { NewpartyPopoverComponent } from '../components/newparty-popover/newparty-popover';
 
 import { Localization as HomeLocalization } from '../pages/home/localization';
 import { Localization as BattleLocalization } from '../pages/battle/localization';
+import { Localization as NewpartyPopoverLocalization } from '../components/newparty-popover/localization';
 
 @NgModule({
   declarations: [
@@ -34,6 +37,7 @@ import { Localization as BattleLocalization } from '../pages/battle/localization
     AddPartyPage,
     PlayerPage,
     NumberPopoverComponent,
+    NewpartyPopoverComponent,
   ],
   imports: [
     BrowserModule,
@@ -51,6 +55,7 @@ import { Localization as BattleLocalization } from '../pages/battle/localization
     AddPartyPage,
     PlayerPage,
     NumberPopoverComponent,
+    NewpartyPopoverComponent,
   ],
   providers: [
     StatusBar,
@@ -62,7 +67,8 @@ import { Localization as BattleLocalization } from '../pages/battle/localization
     Storage,
     AppUpdate,
     HomeLocalization,
-    BattleLocalization
+    BattleLocalization,
+    NewpartyPopoverLocalization,
   ]
 })
 export class AppModule {}

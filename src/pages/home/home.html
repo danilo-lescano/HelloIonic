@@ -29,6 +29,7 @@
             <h2>{{ msg.newPaty }}</h2>
             <ion-buttons class="add-button">
                 <button ion-button outline (click)="promptPartyName()">
+                    <span id="popover1" (click)="presentNumberPopover($event)"></span>
                     <span class="littlePeople">
                         <ion-icon name="people"></ion-icon>
                     </span>

@@ -1,21 +1,30 @@
 import { Component } from '@angular/core';
-import { NavController, AlertController } from 'ionic-angular';
+import { NavController, AlertController, PopoverController } from 'ionic-angular';
 import { BattlePage } from '../battle/battle';
 import { Localization } from './localization';
 import { PartyService, IParty } from '../../services/party.service';
 import { AddPartyPage } from '../add-party/add-party';
+import { NewpartyPopoverComponent } from '../../components/newparty-popover/newparty-popover';
 
 @Component({
  	selector: 'page-home',
   	templateUrl: 'home.html'
 })
 export class HomePage {
-	private parties: IParty[];
+	private parties: IParty[] = [];
 
-	constructor(public navCtrl: NavController, private msg: Localization, private partyService: PartyService, private alertCtrl: AlertController){}
+	private flagPopover: boolean = true;
+
+	constructor(public navCtrl: NavController, private msg: Localization, private partyService: PartyService, private alertCtrl: AlertController, private popoverCtrl: PopoverController){}
 
 	async ionViewWillEnter(){
 		this.parties = await this.partyService.getParty();
+	}
+	ionViewDidLoad(){
+		var e1 = document.createEvent('MouseEvents');
+		e1.initEvent('mousedown', true, true);
+		document.getElementById("popover1").dispatchEvent(e1);
+		document.getElementById("popover1").click();
 	}
 	promptPartyName() {
 		let alert = this.alertCtrl.create({
@@ -49,6 +58,17 @@ export class HomePage {
 			creaturesId: []
 		}
     	this.navCtrl.push(AddPartyPage, { party });
+	}
+	presentNumberPopover(event) {
+		console.log('hehe');
+		let popover;
+		if(!this.parties || this.parties.length < 1 && this.flagPopover){
+			this.flagPopover = false;
+			popover = this.popoverCtrl.create(NewpartyPopoverComponent);
+			popover.present({ ev: event });
+		}
+		event.stopPropagation();
+		return false;
 	}
   	toBattlePage(){
     	this.navCtrl.push(BattlePage);
