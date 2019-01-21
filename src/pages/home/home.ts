@@ -5,6 +5,7 @@ import { Localization } from './localization';
 import { PartyService, IParty } from '../../services/party.service';
 import { AddPartyPage } from '../add-party/add-party';
 import { NewpartyPopoverComponent } from '../../components/newparty-popover/newparty-popover';
+import { ICreature, CreatureService } from '../../services/creature.service';
 
 @Component({
  	selector: 'page-home',
@@ -15,7 +16,7 @@ export class HomePage {
 
 	private flagPopover: boolean = true;
 
-	constructor(public navCtrl: NavController, private msg: Localization, private partyService: PartyService, private alertCtrl: AlertController, private popoverCtrl: PopoverController){}
+	constructor(public navCtrl: NavController, private msg: Localization, private partyService: PartyService, private alertCtrl: AlertController, private popoverCtrl: PopoverController, private creatureService: CreatureService){}
 
 	async ionViewWillEnter(){
 		this.parties = await this.partyService.getParty();
@@ -74,8 +75,17 @@ export class HomePage {
 		event.stopPropagation();
 		return false;
 	}
-  	toBattlePage(party: IParty){
-
-    	this.navCtrl.push(BattlePage);
+  	async toBattlePage(party: IParty){
+		let allCreatures: ICreature[] = await this.creatureService.getCreature();
+		let creatures: ICreature[] = [];
+		for (let i = 0; i < party.creaturesId.length; i++) {
+			var flag = true;
+			for (let j = 0; j < allCreatures.length && flag; j++)
+				if(party.creaturesId[i] == allCreatures[j].id){
+					flag = false;
+					creatures.push(allCreatures[j]);
+				}
+		}
+    	this.navCtrl.push(BattlePage, { creatures });
 	}
 }

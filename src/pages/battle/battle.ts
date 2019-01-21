@@ -44,6 +44,9 @@ export class BattlePage {
 	async ionViewWillEnter(){
 		this.allParties = await this.partyService.getParty();
 		this.allCreatures = await this.creatureService.getCreature();
+
+		let auxCreatures = this.navParams.get("creatures");
+		this.pushCreatures(auxCreatures);
 	}
 
 	async ionViewCanLeave() {

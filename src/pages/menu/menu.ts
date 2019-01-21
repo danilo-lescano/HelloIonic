@@ -2,13 +2,13 @@ import { Component, ViewChild } from '@angular/core';
 import { IonicPage, NavController, NavParams, Nav } from 'ionic-angular';
 
 import { HomePage } from '../home/home';
-import { MonsterPage } from '../monster/monster';
-import { PlayerPage } from '../player/player';
+import { CreaturePage } from '../creature/creature';
 
 export interface PageInterface {
 	title: string;
 	pageName: string;
 	pageComponent?: any;
+	isPlayer: boolean;
 	icon: string;
 }
 
@@ -23,15 +23,14 @@ export class MenuPage {
 	@ViewChild(Nav) nav: Nav;
 
 	pages: PageInterface[] = [
-		{ title: 'Monsters', pageName: 'MonsterPage', pageComponent: MonsterPage, icon: 'paw' },
-		{ title: 'Player', pageName: 'PlayerPage', pageComponent: PlayerPage, icon: 'person' },
+		{ title: 'Bestiary', pageName: 'CreaturePage', pageComponent: CreaturePage, isPlayer: false, icon: 'paw' },
+		{ title: 'Player', pageName: 'CreaturePage', pageComponent: CreaturePage, isPlayer: true, icon: 'person' },
 	];
 
-	constructor(public navCtrl: NavController, public navParams: NavParams) { }
+	constructor(public navCtrl: NavController) { }
 	
-	async ionViewDidEnter(){
-	}
 	openPage(page: PageInterface) {
-		this.navCtrl.push(page.pageComponent);
+		let isPlayer: boolean = page.isPlayer;
+		this.navCtrl.push(page.pageComponent, { isPlayer });
 	}
 }

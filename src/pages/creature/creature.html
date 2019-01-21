@@ -1,0 +1,27 @@
+<ion-header>
+	<ion-navbar>
+		<ion-buttons end>
+			<button ion-button icon-only (click)="renderAddCreaturePage()">
+				<ion-icon name="add"></ion-icon>
+			</button>
+		</ion-buttons>
+		<ion-title *ngIf="!isPlayerInterface"><ion-icon name="paw"></ion-icon> Monster</ion-title>
+		<ion-title *ngIf="isPlayerInterface"><ion-icon name="person"></ion-icon> Players and NPCs</ion-title>
+	</ion-navbar>
+</ion-header>
+
+
+<ion-content padding>
+	<ion-list>
+		<ng-container *ngFor="let creature of creatures">
+			<ion-item *ngIf="creature.isPlayer == isPlayerInterface">
+				<h2>{{creature.name}}</h2>
+				<ion-buttons class="eddit-button">
+					<button ion-button icon-only small (click)="renderAddCreaturePage(creature)">
+						<ion-icon name="create"></ion-icon>
+					</button>
+				</ion-buttons>
+			</ion-item>
+		</ng-container>
+	</ion-list>
+</ion-content>

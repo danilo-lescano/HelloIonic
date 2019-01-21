@@ -14,9 +14,8 @@ import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { MenuPage } from '../pages/menu/menu';
 import { BattlePage } from '../pages/battle/battle';
-import { MonsterPage } from '../pages/monster/monster';
-import { PlayerPage } from '../pages/player/player';
 import { AddPartyPage } from '../pages/add-party/add-party';
+import { CreaturePage } from '../pages/creature/creature';
 
 import { NumberPopoverComponent } from '../components/number-popover/number-popover';
 import { NewpartyPopoverComponent } from '../components/newparty-popover/newparty-popover';
@@ -31,11 +30,10 @@ import { Localization as NewpartyPopoverLocalization } from '../components/newpa
     HomePage,
     MenuPage,
     BattlePage,
-    MonsterPage,
     AddPartyPage,
-    PlayerPage,
     NumberPopoverComponent,
     NewpartyPopoverComponent,
+    CreaturePage,
   ],
   imports: [
     BrowserModule,
@@ -48,11 +46,10 @@ import { Localization as NewpartyPopoverLocalization } from '../components/newpa
     HomePage,
     MenuPage,
     BattlePage,
-    MonsterPage,
     AddPartyPage,
-    PlayerPage,
     NumberPopoverComponent,
     NewpartyPopoverComponent,
+    CreaturePage,
   ],
   providers: [
     StatusBar,
