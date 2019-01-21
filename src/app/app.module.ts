@@ -14,7 +14,6 @@ import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { MenuPage } from '../pages/menu/menu';
 import { BattlePage } from '../pages/battle/battle';
-import { PartyPage } from '../pages/party/party';
 import { MonsterPage } from '../pages/monster/monster';
 import { PlayerPage } from '../pages/player/player';
 import { AddPartyPage } from '../pages/add-party/add-party';
@@ -32,7 +31,6 @@ import { Localization as NewpartyPopoverLocalization } from '../components/newpa
     HomePage,
     MenuPage,
     BattlePage,
-    PartyPage,
     MonsterPage,
     AddPartyPage,
     PlayerPage,
@@ -50,7 +48,6 @@ import { Localization as NewpartyPopoverLocalization } from '../components/newpa
     HomePage,
     MenuPage,
     BattlePage,
-    PartyPage,
     MonsterPage,
     AddPartyPage,
     PlayerPage,

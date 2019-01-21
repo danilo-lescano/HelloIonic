@@ -13,38 +13,35 @@
 
 <ion-content padding>
     <ion-list>
-        <ion-item *ngFor="let party of parties">
-            <h2>{{ party.name }}</h2>
-            <ion-buttons class="add-button">
-                <button ion-button>
-                    <ion-icon name="create"></ion-icon>
-                </button>
-                <button ion-button>
-                    <ion-icon name="custom-cross-sword"></ion-icon>
-                </button>
-            </ion-buttons>
-        </ion-item>
+        <ion-card *ngFor="let party of parties">
+            <ion-card-header>{{ party.name }}</ion-card-header>
+            <ion-card-content>
+                <ion-buttons>
+                    <button ion-button (click)="renderAddPartyPage(party)">
+                        <ion-icon name="create"></ion-icon>
+                    </button>
+                    <button ion-button (click)="toBattlePage(party)">
+                        <ion-icon name="custom-cross-sword"></ion-icon>
+                    </button>
+                </ion-buttons>
+            </ion-card-content>
+        </ion-card>
 
-        <ion-item>
-            <h2>{{ msg.newPaty }}</h2>
-            <ion-buttons class="add-button">
-                <button ion-button outline (click)="promptPartyName()">
-                    <span id="popover1" (click)="presentNumberPopover($event)"></span>
-                    <span class="littlePeople">
-                        <ion-icon name="people"></ion-icon>
-                    </span>
-                    <span class="litteAdd">
-                        <ion-icon name="add"></ion-icon>
-                    </span>
-                </button>
-            </ion-buttons>
-        </ion-item>
+        <ion-card>
+            <ion-card-header color="primary">{{ msg.newPaty }}</ion-card-header>
+            <ion-card-content>
+                <ion-buttons>
+                    <button ion-button outline block (click)="promptPartyName()">
+                        <span class="littlePeople">
+                            <ion-icon name="people"></ion-icon>
+                        </span>
+                        <span class="litteAdd">
+                            <ion-icon name="add"></ion-icon>
+                        </span>
+                    </button>
+                </ion-buttons>
+            </ion-card-content>
+            <span id="popover1" (click)="presentNumberPopover($event)"></span>
+        </ion-card>
     </ion-list>
-
-    
-    <ion-buttons>
-        <button ion-button block (click)="toBattlePage()">
-            start battle
-        </button>
-    </ion-buttons>
 </ion-content>

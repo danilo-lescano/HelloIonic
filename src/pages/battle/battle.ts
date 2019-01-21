@@ -39,9 +39,7 @@ export class BattlePage {
 	
 	private numberOrder: number[] = [];
 
-	constructor(public navCtrl: NavController, public navParams: NavParams, private creatureService: CreatureService, private partyService: PartyService, private modal: ModalController, private popoverCtrl: PopoverController, private alertCtrl: AlertController, private msg: Localization) {
-		console.log(msg.x);
-	}
+	constructor(public navCtrl: NavController, public navParams: NavParams, private creatureService: CreatureService, private partyService: PartyService, private modal: ModalController, private popoverCtrl: PopoverController, private alertCtrl: AlertController, private msg: Localization) {}
 
 	async ionViewWillEnter(){
 		this.allParties = await this.partyService.getParty();

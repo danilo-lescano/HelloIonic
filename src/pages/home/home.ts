@@ -19,12 +19,15 @@ export class HomePage {
 
 	async ionViewWillEnter(){
 		this.parties = await this.partyService.getParty();
+		this.checkForParties();
 	}
-	ionViewDidLoad(){
-		var e1 = document.createEvent('MouseEvents');
-		e1.initEvent('mousedown', true, true);
-		document.getElementById("popover1").dispatchEvent(e1);
-		document.getElementById("popover1").click();
+	checkForParties(){
+		if(!this.parties || this.parties.length < 1){
+			var e1 = document.createEvent('MouseEvents');
+			e1.initEvent('mousedown', true, true);
+			document.getElementById("popover1").dispatchEvent(e1);
+			document.getElementById("popover1").click();
+		}
 	}
 	promptPartyName() {
 		let alert = this.alertCtrl.create({
@@ -52,15 +55,16 @@ export class HomePage {
 		alert.present();
 	}
 	newParty(partyName: string){
-		let party: IParty = {
+		this.renderAddPartyPage({
 			id: null,
 			name: partyName,
 			creaturesId: []
-		}
-    	this.navCtrl.push(AddPartyPage, { party });
+		});
+	}
+	renderAddPartyPage(party: IParty) {
+		this.navCtrl.push(AddPartyPage, { party });
 	}
 	presentNumberPopover(event) {
-		console.log('hehe');
 		let popover;
 		if(!this.parties || this.parties.length < 1 && this.flagPopover){
 			this.flagPopover = false;
@@ -70,7 +74,8 @@ export class HomePage {
 		event.stopPropagation();
 		return false;
 	}
-  	toBattlePage(){
+  	toBattlePage(party: IParty){
+
     	this.navCtrl.push(BattlePage);
 	}
 }
