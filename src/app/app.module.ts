@@ -25,6 +25,7 @@ import { Localization as HomeLocalization } from '../pages/home/localization';
 import { Localization as BattleLocalization } from '../pages/battle/localization';
 import { Localization as EncounterLocalization } from '../pages/encounter/localization';
 import { Localization as NewpartyPopoverLocalization } from '../components/newparty-popover/localization';
+import { OptionsPage } from '../pages/options/options';
 
 @NgModule({
   declarations: [
@@ -37,6 +38,7 @@ import { Localization as NewpartyPopoverLocalization } from '../components/newpa
     NewpartyPopoverComponent,
     CreaturePage,
     EncounterPage,
+    OptionsPage,
   ],
   imports: [
     BrowserModule,
@@ -54,6 +56,7 @@ import { Localization as NewpartyPopoverLocalization } from '../components/newpa
     NewpartyPopoverComponent,
     CreaturePage,
     EncounterPage,
+    OptionsPage,
   ],
   providers: [
     StatusBar,

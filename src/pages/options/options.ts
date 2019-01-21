@@ -1,25 +1,32 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { LanguageService, Languages } from '../../services/language.service';
 
-/**
- * Generated class for the OptionsPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
 
 @IonicPage()
 @Component({
-  selector: 'page-options',
-  templateUrl: 'options.html',
+	selector: 'page-options',
+	templateUrl: 'options.html',
 })
 export class OptionsPage {
+	private languages = Languages;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
-  }
+	private chosedLanguage = this.languages[0];
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad OptionsPage');
-  }
+	constructor(private navCtrl: NavController, private languageService: LanguageService) { }
 
+	async ionViewWillEnter(){
+		let index = await this.languageService.getLang();
+		this.chosedLanguage = this.languages[index];
+	}
+
+	changeLanguage(){
+		let index; let flag = true;
+		for (let i = 0; i < this.languages.length && flag; i++)
+			if(this.languages[i] == this.chosedLanguage){
+				index = i;
+				flag = false;
+			}
+		this.languageService.changeLanguage(index);
+	}
 }
