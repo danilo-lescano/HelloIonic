@@ -15,6 +15,7 @@
 
 <ion-content padding>
 	<h4>Add creatures, players, npcs or parties to the battle.</h4>
+	<!--
 	<ion-item>
 		<h2>No creatures? Create some!</h2>
 		<ion-buttons class="add-button">
@@ -23,9 +24,9 @@
 			</button>
 		</ion-buttons>
 	</ion-item>
+	-->
 	<ion-item>
-		<ion-label>Name</ion-label>
-		<ion-input type="string" [(ngModel)]="nameSearch"></ion-input>
+		<ion-searchbar [(ngModel)]="nameSearch"></ion-searchbar>
 	</ion-item>
 	<ion-item>
 		<ion-label>Player or NPCs</ion-label>
@@ -43,7 +44,8 @@
 	<ng-container *ngFor="let party of parties">
 		<ion-item *ngIf="isParty && (nameSearch == '' || party.name.toLowerCase().includes(nameSearch.toLowerCase()))">
 			<h2>
-				<ion-icon name="people"></ion-icon>
+				<ion-icon *ngIf="!party.isEncounter" name="people"></ion-icon>
+				<ion-icon *ngIf="party.isEncounter" name="custom-paws"></ion-icon>
 				{{party.name}}
 			</h2>
 			<ion-buttons class="add-button">
