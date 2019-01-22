@@ -14,6 +14,7 @@ import { Localization } from './localization';
 @Component({
 	selector: 'page-add-party',
 	templateUrl: 'add-party.html',
+	providers: [Localization],
 })
 export class AddPartyPage {
 	private party: IParty = {

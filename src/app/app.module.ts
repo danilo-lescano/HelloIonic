@@ -22,13 +22,6 @@ import { OptionsPage } from '../pages/options/options';
 import { NumberPopoverComponent } from '../components/number-popover/number-popover';
 import { NewpartyPopoverComponent } from '../components/newparty-popover/newparty-popover';
 
-import { Localization as HomeLocalization } from '../pages/home/localization';
-import { Localization as BattleLocalization } from '../pages/battle/localization';
-import { Localization as EncounterLocalization } from '../pages/encounter/localization';
-import { Localization as NewpartyPopoverLocalization } from '../components/newparty-popover/localization';
-import { Localization as AddPartyLocalization } from '../pages/add-party/localization';
-
-
 @NgModule({
   declarations: [
     MyApp,
@@ -69,7 +62,6 @@ import { Localization as AddPartyLocalization } from '../pages/add-party/localiz
     LanguageService,
     Storage,
     AppUpdate,
-    HomeLocalization, AddPartyLocalization, BattleLocalization, EncounterLocalization, NewpartyPopoverLocalization, 
   ]
 })
 export class AppModule {}

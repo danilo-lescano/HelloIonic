@@ -1,11 +1,13 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavParams, ViewController } from 'ionic-angular';
 import { ICreature, CreatureService } from '../../services/creature.service';
+import { Localization } from './localization';
 
 @IonicPage()
 @Component({
 	selector: 'page-search-creature-modal',
 	templateUrl: 'search-creature-modal.html',
+	providers: [Localization],
 })
 export class SearchCreatureModalPage {
 	private creatures: ICreature[] = [];

@@ -8,6 +8,7 @@ import { Localization } from './localization';
 @Component({
 	selector: 'page-encounter',
 	templateUrl: 'encounter.html',
+	providers: [Localization],
 })
 export class EncounterPage {
 	private parties: IParty[] = [];

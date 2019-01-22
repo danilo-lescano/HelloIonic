@@ -24,6 +24,7 @@ export interface ICreatureGen{
 @Component({
 	selector: 'page-battle',
 	templateUrl: 'battle.html',
+	providers: [Localization],
 })
 export class BattlePage {
 

@@ -4,10 +4,13 @@ import { IonicPage, NavParams, ViewController, Modal, ModalController } from 'io
 import { IParty, PartyService } from '../../services/party.service';
 import { ICreature, CreatureService } from '../../services/creature.service';
 
+import { Localization } from './localization';
+
 @IonicPage()
 @Component({
 	selector: 'page-add-to-battle-modal',
 	templateUrl: 'add-to-battle-modal.html',
+	providers: [Localization],
 })
 export class AddToBattleModalPage {
 

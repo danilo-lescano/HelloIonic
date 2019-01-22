@@ -6,6 +6,8 @@ import { CreaturePage } from '../creature/creature';
 import { EncounterPage } from '../encounter/encounter';
 import { OptionsPage } from '../options/options';
 
+import { Localization } from './localization';
+
 export interface PageInterface {
 	title: string;
 	pageName: string;
@@ -18,6 +20,7 @@ export interface PageInterface {
 @Component({
 	selector: 'page-menu',
 	templateUrl: 'menu.html',
+	providers: [Localization],
 })
 export class MenuPage {
 	rootPage: any = HomePage;

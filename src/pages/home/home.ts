@@ -9,7 +9,8 @@ import { ICreature, CreatureService } from '../../services/creature.service';
 
 @Component({
  	selector: 'page-home',
-  	templateUrl: 'home.html'
+  	templateUrl: 'home.html',
+	providers: [Localization],
 })
 export class HomePage {
 	private parties: IParty[] = [];

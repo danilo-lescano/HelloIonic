@@ -1,19 +1,20 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { LanguageService, Languages } from '../../services/language.service';
-
+import { Localization } from './localization';
 
 @IonicPage()
 @Component({
 	selector: 'page-options',
 	templateUrl: 'options.html',
+	providers: [Localization],
 })
 export class OptionsPage {
 	private languages = Languages;
 
 	private chosedLanguage = this.languages[0];
 
-	constructor(private navCtrl: NavController, private languageService: LanguageService) { }
+	constructor(private navCtrl: NavController, private languageService: LanguageService, private msg: Localization) { }
 
 	async ionViewWillEnter(){
 		let index = await this.languageService.getLang();

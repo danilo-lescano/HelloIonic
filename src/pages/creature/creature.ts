@@ -3,10 +3,13 @@ import { IonicPage, ModalController, Modal, NavParams } from 'ionic-angular';
 
 import { CreatureService, ICreature } from '../../services/creature.service';
 
+import { Localization } from './localization';
+
 @IonicPage()
 @Component({
 	selector: 'page-creature',
 	templateUrl: 'creature.html',
+	providers: [Localization],
 })
 export class CreaturePage {
 	private creatures: ICreature[] = [];

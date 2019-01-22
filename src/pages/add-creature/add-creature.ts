@@ -2,14 +2,15 @@ import { Component } from '@angular/core';
 import { IonicPage, NavParams, ViewController } from 'ionic-angular';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 
-import { CreatureService } from '../../services/creature.service';
+import { CreatureService, ICreature } from '../../services/creature.service';
 
-import { ICreature } from '../../services/creature.service';
+import { Localization } from './localization';
 
 @IonicPage()
 @Component({
 	selector: 'page-add-creature',
 	templateUrl: 'add-creature.html',
+	providers: [Localization],
 })
 export class AddCreaturePage {
 	private creature: ICreature;
