@@ -65,4 +65,18 @@ export class CreatureService {
             this.creatures = [];
         return this.creatures.slice();
     }
+    async getLastCreature(){
+        let returnCreature: ICreature;
+        this.creatures = await this.storage.get('creatures');
+        if(this.creatures === null){
+            this.creatures = [];
+            return null;
+        }
+        for (let i = 0; i < this.creatures.length; i++) {
+            console.log(this.creatures[i].id + " " + this.creatures[i].name);
+            if(!returnCreature || returnCreature.id < this.creatures[i].id)
+                returnCreature = this.creatures[i];
+        }
+        return returnCreature;
+    }
 }

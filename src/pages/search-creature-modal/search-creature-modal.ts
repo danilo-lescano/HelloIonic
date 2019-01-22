@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavParams, ViewController, Modal, ModalController} from 'ionic-angular';
+import { IonicPage, NavParams, ViewController } from 'ionic-angular';
 import { ICreature, CreatureService } from '../../services/creature.service';
 
 @IonicPage()
@@ -17,7 +17,7 @@ export class SearchCreatureModalPage {
 
 	private numberOfCreatures: number = 0;
 
-	constructor(private navParams: NavParams, private viewController: ViewController, private modal: ModalController, private creatureService: CreatureService) {}
+	constructor(private navParams: NavParams, private viewController: ViewController, private creatureService: CreatureService) {}
 	
 	async ionViewWillEnter(){
 		this.loadData();
@@ -61,9 +61,4 @@ export class SearchCreatureModalPage {
 		this.numberOfCreatures++;
 	}
 
-	addCreatureModal(){
-		var modalView: Modal = this.modal.create("AddCreaturePage");
-		modalView.present();
-		modalView.onDidDismiss(()=>this.loadData());
-	}
 }

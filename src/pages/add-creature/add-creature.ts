@@ -15,6 +15,8 @@ export class AddCreaturePage {
 	private creature: ICreature;
 	private creatureForm: any;
 
+	private listCreaturesAdded: ICreature[] = [];
+
 	constructor(private viewController: ViewController, private navParams: NavParams, private creatureService: CreatureService, private formBuilder: FormBuilder) {
 		this.loadCreature();
 		this.creatureForm = formBuilder.group({
@@ -41,12 +43,14 @@ export class AddCreaturePage {
 		this.creature.isPlayer = isPlayer ? isPlayer : this.creature.isPlayer;
   	}
 
-	onAddCreature(creature: ICreature){
+	async onAddCreature(creature: ICreature){
 		this.creatureService.addCreature(creature);
-		this.viewController.dismiss();
+		this.listCreaturesAdded.push(await this.creatureService.getLastCreature());
+		this.dismissModal();
 	}
-	saveAndContinue(creature: ICreature){
+	async saveAndContinue(creature: ICreature){
 		this.creatureService.addCreature(creature);
+		this.listCreaturesAdded.push(await this.creatureService.getLastCreature());
 		this.creature = {
 			id: null,
 			isPlayer: this.creature.isPlayer,
@@ -58,9 +62,9 @@ export class AddCreaturePage {
 	trashThisCreature(){
 		if(this.creature.id != null)
 			this.creatureService.delCreature(this.creature);
-		this.viewController.dismiss();
+		this.dismissModal();
 	}
 	dismissModal(){
-		this.viewController.dismiss();
+		this.viewController.dismiss(this.listCreaturesAdded);
 	}
 }

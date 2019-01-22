@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ModalController, Modal } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ModalController, Modal, AlertController } from 'ionic-angular';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 
 import { CreatureService } from '../../services/creature.service';
@@ -8,6 +8,7 @@ import { AddCreaturePage } from '../add-creature/add-creature';
 
 import { IParty } from '../../services/party.service';
 import { ICreature } from '../../services/creature.service';
+import { Localization } from './localization';
 
 @IonicPage()
 @Component({
@@ -25,7 +26,7 @@ export class AddPartyPage {
 	private allCreatures: ICreature[] = [];
 	private partyForm: any;
 
-	constructor(public navCtrl: NavController, public navParams: NavParams, private partyService: PartyService, private creatureService: CreatureService, private formBuilder: FormBuilder, private modal: ModalController){
+	constructor(public navCtrl: NavController, public navParams: NavParams, private partyService: PartyService, private creatureService: CreatureService, private formBuilder: FormBuilder, private modal: ModalController, private alertCtrl: AlertController, private msg: Localization){
 		this.loadParty();
 		this.partyForm = formBuilder.group({
 			id: ['', Validators.compose([])],
@@ -58,8 +59,39 @@ export class AddPartyPage {
 		}
 		return;
 	}
-
 	addCreature(){
+		let alert = this.alertCtrl.create({
+			title: this.msg["addCreatureTittle"],
+			buttons: [
+				{
+					text: this.msg["newCreature"],
+					handler: data => {
+						this.newCreatureModal();
+					}
+				},
+				{
+					text: this.msg["existingCreature"],
+					handler: data => {
+						this.existingCreatureModal();
+					}
+				},
+				{
+					text: this.msg["cancel"],
+					role: "cancel",
+					handler: data => {}
+				}
+			]
+		});
+		alert.present();
+	}
+	newCreatureModal(){
+		var modalView: Modal = this.modal.create("AddCreaturePage");
+		modalView.present();
+		modalView.onDidDismiss((creature? : ICreature[])=>{
+			this.pushCreatures(creature);
+		});
+	}
+	existingCreatureModal(){
 		if(!this.party.creaturesId)
 			this.party.creaturesId = [];
 		this.openModal();
@@ -100,7 +132,7 @@ export class AddPartyPage {
 		modalView.present();
 
 		modalView.onDidDismiss((creature? : ICreature[])=>{
-			this.pushCreatures(creature)
+			this.pushCreatures(creature);
 		});
 	}
 	pushCreatures(creature? : ICreature[]){
