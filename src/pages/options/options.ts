@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { LanguageService, Languages } from '../../services/language.service';
 import { Localization } from './localization';
+import { SplashScreen } from '@ionic-native/splash-screen';
 
 @IonicPage()
 @Component({
@@ -14,11 +15,15 @@ export class OptionsPage {
 
 	private chosedLanguage = this.languages[0];
 
-	constructor(private navCtrl: NavController, private languageService: LanguageService, private msg: Localization) { }
+	constructor(private navCtrl: NavController, private languageService: LanguageService, private msg: Localization, private splash: SplashScreen) { }
 
 	async ionViewWillEnter(){
 		let index = await this.languageService.getLang();
 		this.chosedLanguage = this.languages[index];
+	}
+	ionViewWillLeave(){
+		this.splash.show();
+		window.location.reload();
 	}
 
 	changeLanguage(){
