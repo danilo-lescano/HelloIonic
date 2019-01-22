@@ -44,12 +44,12 @@ export class AddCreaturePage {
   	}
 
 	async onAddCreature(creature: ICreature){
-		this.creatureService.addCreature(creature);
+		await this.creatureService.addCreature(creature);
 		this.listCreaturesAdded.push(await this.creatureService.getLastCreature());
 		this.dismissModal();
 	}
 	async saveAndContinue(creature: ICreature){
-		this.creatureService.addCreature(creature);
+		await this.creatureService.addCreature(creature);
 		this.listCreaturesAdded.push(await this.creatureService.getLastCreature());
 		this.creature = {
 			id: null,

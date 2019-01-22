@@ -10,6 +10,7 @@ export const Languages = [
 export class LanguageService {
     private lang: number;
     constructor(private storage: Storage){
+        //this.storage.clear();
         this.load();
     }
 

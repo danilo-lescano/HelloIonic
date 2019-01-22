@@ -33,7 +33,7 @@ export class CreatureService {
         }
     }
 
-    addCreature(creature: ICreature){
+    async addCreature(creature: ICreature){
         if(creature.id === null)
             creature.id = ++this.creatureCount;
         
@@ -48,6 +48,7 @@ export class CreatureService {
             this.creatures.push(creature);
         this.storage.set('creatures', this.creatures);
         this.storage.set('creatureCount', this.creatureCount);
+        return;
     }
     delCreature(creature: ICreature){
         var isEdited = false;
@@ -68,15 +69,11 @@ export class CreatureService {
     async getLastCreature(){
         let returnCreature: ICreature;
         this.creatures = await this.storage.get('creatures');
-        if(this.creatures === null){
-            this.creatures = [];
-            return null;
+        this.creatureCount = await this.storage.get('creatureCount');
+        for (let i = 0; this.creatures && i < this.creatures.length; i++) {
+            if(this.creatureCount === this.creatures[i].id)
+                return this.creatures[i];
         }
-        for (let i = 0; i < this.creatures.length; i++) {
-            console.log(this.creatures[i].id + " " + this.creatures[i].name);
-            if(!returnCreature || returnCreature.id < this.creatures[i].id)
-                returnCreature = this.creatures[i];
-        }
-        return returnCreature;
+        return null;
     }
 }

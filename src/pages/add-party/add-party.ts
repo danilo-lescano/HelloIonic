@@ -85,9 +85,10 @@ export class AddPartyPage {
 		alert.present();
 	}
 	newCreatureModal(){
-		var modalView: Modal = this.modal.create("AddCreaturePage");
+		var modalView: Modal = this.modal.create("AddCreaturePage", { isPlayer: true });
 		modalView.present();
-		modalView.onDidDismiss((creature? : ICreature[])=>{
+		modalView.onDidDismiss(async (creature? : ICreature[])=>{
+			this.allCreatures = await this.creatureService.getCreature();
 			this.pushCreatures(creature);
 		});
 	}
@@ -137,6 +138,7 @@ export class AddPartyPage {
 	}
 	pushCreatures(creature? : ICreature[]){
 		if(creature){
+			console.log(creature);
 			for (let i = 0; i < this.allCreatures.length; i++) {
 				for (let j = 0; j < creature.length; j++) {
 					if(creature[j].id === this.allCreatures[i].id){
