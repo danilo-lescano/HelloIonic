@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input, ViewChild } from '@angular/core';
 import { IonicPage, NavParams, ViewController } from 'ionic-angular';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 
@@ -13,6 +13,8 @@ import { Localization } from './localization';
 	providers: [Localization],
 })
 export class AddCreaturePage {
+	@ViewChild('nameInput') nameInput;
+
 	private creature: ICreature;
 	private creatureForm: any;
 
@@ -59,6 +61,7 @@ export class AddCreaturePage {
 			initiative: "1d20",
 			hp: null
 		}
+		this.nameInput.setFocus();
 	}
 	trashThisCreature(){
 		if(this.creature.id != null)

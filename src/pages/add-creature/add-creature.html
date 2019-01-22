@@ -20,7 +20,7 @@
 		</ion-item>
         <ion-item>
           	<ion-label>Name</ion-label>
-          	<ion-input type="text" formControlName="name" [(ngModel)]="creature.name"></ion-input>
+          	<ion-input type="text" formControlName="name" [(ngModel)]="creature.name" #nameInput></ion-input>
 		</ion-item>
         <ion-item *ngIf="creatureForm.controls.name.hasError('required') && creatureForm.controls.name.touched">
 			<p style="color: red;">Sorry, field name is required!</p>

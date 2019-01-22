@@ -3,7 +3,8 @@ import { Localization } from './localization';
 
 @Component({
 	selector: 'newparty-popover',
-	templateUrl: 'newparty-popover.html'
+	templateUrl: 'newparty-popover.html',
+	providers: [Localization],
 })
 export class NewpartyPopoverComponent {
 
