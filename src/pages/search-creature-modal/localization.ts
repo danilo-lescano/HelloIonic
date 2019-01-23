@@ -16,8 +16,29 @@ export class Localization {
         {
             name: "title",
             values: [
-                "TITLE",
-                "TITULO"
+                "Add To Party",
+                "Adicionar Grupo"
+            ]
+        },
+        {
+            name: "newMemberMsg",
+            values: [
+                "Add creatures, players or npcs to the party.",
+                "Adicionar criaturas, jogadores ou npcs ao grupo."
+            ]
+        },
+        {
+            name: "playerLabel",
+            values: [
+                "Player or NPCs",
+                "Jogadores ou NPCs"
+            ]
+        },
+        {
+            name: "monsterLabel",
+            values: [
+                "Monster",
+                "Monstro"
             ]
         },
     ];

@@ -28,7 +28,10 @@ export class AddPartyPage {
 	private partyForm: any;
 
 	constructor(public navCtrl: NavController, public navParams: NavParams, private partyService: PartyService, private creatureService: CreatureService, private formBuilder: FormBuilder, private modal: ModalController, private alertCtrl: AlertController, private msg: Localization){
-		this.loadParty();
+		this.loadParty().then(()=>{
+			if(this.party.creaturesId.length == 0)
+				this.addCreature();
+		});
 		this.partyForm = formBuilder.group({
 			id: ['', Validators.compose([])],
 			name: ['', Validators.compose([Validators.required])],

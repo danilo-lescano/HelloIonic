@@ -8,8 +8,8 @@
 				<ion-icon name="trash"></ion-icon>
 			</button>
 		</ion-buttons>
-		<ion-title *ngIf="party.id">Editing {{party.name}}</ion-title>
-		<ion-title *ngIf="!party.id">New Party</ion-title>
+		<ion-title *ngIf="party.id">{{ msg.editing }} {{party.name}}</ion-title>
+		<ion-title *ngIf="!party.id">{{ msg.newParty }}</ion-title>
 	</ion-navbar>
 </ion-header>
 
@@ -19,28 +19,23 @@
 			<ion-input type="hidden" formControlName="id" [(ngModel)]="party.id"></ion-input>
 		</ion-item>
 		<ion-item>
-			<ion-label>Name</ion-label>
+			<ion-label>{{ msg.name }}</ion-label>
 			<ion-input type="text" formControlName="name" [(ngModel)]="party.name"></ion-input>
 		</ion-item>
 		<ion-item *ngIf="partyForm.controls.name.hasError('required') && partyForm.controls.name.touched">
-			<p style="color: red;">Sorry, field name is required!</p>
+			<p style="color: red;">{{ msg.nameErr }}</p>
 		</ion-item>
 
 		<ng-container *ngFor="let creature of creatures">
 			<ion-item *ngIf="creature">
 				<h2>{{creature.name}}</h2>
 				<ion-buttons class="eddit-button">
-					
-					<!--<button ion-button icon-only small (click)="renderAddCreaturePage(creature)">
-						<ion-icon name="create"></ion-icon>
-					</button>-->
-
 					<button ion-button icon-only small type="button" (click)="trashCreature(creature)">
 						<ion-icon name="trash"></ion-icon>
 					</button>
 				</ion-buttons>
 			</ion-item>
 		</ng-container>
-		<button ion-button block type="submit" [disabled]="!partyForm.valid">Save Party</button>
+		<button ion-button block type="submit" [disabled]="!partyForm.valid">{{ msg.saveParty }}</button>
 	</form>
 </ion-content>

@@ -23,18 +23,18 @@ export interface PageInterface {
 	providers: [Localization],
 })
 export class MenuPage {
-	rootPage: any = HomePage;
+	private rootPage: any = HomePage;
 
 	@ViewChild(Nav) nav: Nav;
 
-	pages: PageInterface[] = [
-		{ title: 'Bestiary', pageName: 'CreaturePage', pageComponent: CreaturePage, isPlayer: false, icon: 'paw' },
-		{ title: 'Player', pageName: 'CreaturePage', pageComponent: CreaturePage, isPlayer: true, icon: 'person' },
-		{ title: 'Encounter Groups', pageName: 'EncounterPage', pageComponent: EncounterPage, icon: 'custom-paws' },
-		{ title: 'Options', pageName: 'OptionsPage', pageComponent: OptionsPage, icon: 'cog' },
+	private pages: PageInterface[] = [
+		{ title: 'bestiaryTitle', pageName: 'CreaturePage', pageComponent: CreaturePage, isPlayer: false, icon: 'paw' },
+		{ title: 'playerTitle', pageName: 'CreaturePage', pageComponent: CreaturePage, isPlayer: true, icon: 'person' },
+		{ title: 'encouterTitle', pageName: 'EncounterPage', pageComponent: EncounterPage, icon: 'custom-paws' },
+		{ title: 'optionsTitle', pageName: 'OptionsPage', pageComponent: OptionsPage, icon: 'cog' },
 	];
 
-	constructor(public navCtrl: NavController) { }
+	constructor(public navCtrl: NavController, private msg: Localization) {}
 	
 	openPage(page: PageInterface) {
 		let isPlayer: boolean = page.isPlayer;

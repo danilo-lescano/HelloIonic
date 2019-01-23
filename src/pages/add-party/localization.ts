@@ -23,15 +23,15 @@ export class Localization {
         {
             name: "addCreatureTittle",
             values: [
-                "New or existing creature?",
-                "Uma nova ou já existente criatura?"
+                "Add new or existing member?",
+                "Adicionar um novo membro ou já um existente?"
             ]
         },
         {
             name: "newCreature",
             values: [
                 "New!",
-                "Nova!"
+                "Novo!"
             ]
         },
         {
@@ -46,6 +46,41 @@ export class Localization {
             values: [
                 "Existing!",
                 "Existente!"
+            ]
+        },
+        {
+            name: "editing",
+            values: [
+                "Editing",
+                "Editando"
+            ]
+        },
+        {
+            name: "newParty",
+            values: [
+                "New Party!",
+                "Novo Grupo!"
+            ]
+        },
+        {
+            name: "name",
+            values: [
+                "Name",
+                "Nome"
+            ]
+        },
+        {
+            name: "nameErr",
+            values: [
+                "Sorry, field name is required!",
+                "O campo Nome é obrigatório!"
+            ]
+        },
+        {
+            name: "saveParty",
+            values: [
+                "Save Party",
+                "Salvar Grupo"
             ]
         }
         

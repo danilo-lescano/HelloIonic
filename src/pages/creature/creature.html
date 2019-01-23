@@ -5,8 +5,8 @@
 				<ion-icon name="add-circle"></ion-icon>
 			</button>
 		</ion-buttons>
-		<ion-title *ngIf="!isPlayerInterface"><ion-icon name="paw"></ion-icon> Monster</ion-title>
-		<ion-title *ngIf="isPlayerInterface"><ion-icon name="person"></ion-icon> Players and NPCs</ion-title>
+		<ion-title *ngIf="!isPlayerInterface"><ion-icon name="paw"></ion-icon>{{ msg.title1 }}</ion-title>
+		<ion-title *ngIf="isPlayerInterface"><ion-icon name="person"></ion-icon>{{ msg.title2 }}</ion-title>
 	</ion-navbar>
 </ion-header>
 

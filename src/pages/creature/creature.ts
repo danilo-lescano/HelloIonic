@@ -15,7 +15,7 @@ export class CreaturePage {
 	private creatures: ICreature[] = [];
 	private isPlayerInterface: boolean = false;
 
-	constructor(private modal: ModalController, private navParams: NavParams, private creatureService: CreatureService) { }
+	constructor(private modal: ModalController, private navParams: NavParams, private creatureService: CreatureService, private msg: Localization) { }
 
 	ionViewWillEnter() {
 		this.loadCreatures();

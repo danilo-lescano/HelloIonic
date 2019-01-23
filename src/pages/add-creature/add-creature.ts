@@ -20,7 +20,7 @@ export class AddCreaturePage {
 
 	private listCreaturesAdded: ICreature[] = [];
 
-	constructor(private viewController: ViewController, private navParams: NavParams, private creatureService: CreatureService, private formBuilder: FormBuilder) {
+	constructor(private viewController: ViewController, private navParams: NavParams, private creatureService: CreatureService, private formBuilder: FormBuilder, private msg: Localization) {
 		this.loadCreature();
 		this.creatureForm = formBuilder.group({
 			id: ['', Validators.compose([])],

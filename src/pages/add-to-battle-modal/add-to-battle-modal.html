@@ -1,6 +1,6 @@
 <ion-header>
 	<ion-navbar>
-		<ion-title>Add To Battle</ion-title>
+		<ion-title>{{ msg.title }}</ion-title>
 		<ion-buttons end>
 			<button ion-button large (click)="returnThisCreatures()">
 				<ion-icon name="add-circle"></ion-icon>
@@ -14,30 +14,20 @@
 
 
 <ion-content padding>
-	<h4>Add creatures, players, npcs or parties to the battle.</h4>
-	<!--
-	<ion-item>
-		<h2>No creatures? Create some!</h2>
-		<ion-buttons class="add-button">
-			<button ion-button round icon-only type="button" (click)="addCreatureModal()">
-				<ion-icon name="add-circle"></ion-icon>
-			</button>
-		</ion-buttons>
-	</ion-item>
-	-->
+	<h4>{{ msg.addPresenting }}</h4>
 	<ion-item>
 		<ion-searchbar [(ngModel)]="nameSearch" placeholder="teste"></ion-searchbar>
 	</ion-item>
 	<ion-item>
-		<ion-label>Player or NPCs</ion-label>
+		<ion-label>{{ msg.playerLabel }}</ion-label>
 		<ion-checkbox [(ngModel)]="isPlayer"></ion-checkbox>
 	</ion-item>
 	<ion-item>
-		<ion-label>Monster</ion-label>
+		<ion-label>{{ msg.monsterLabel }}</ion-label>
 		<ion-checkbox [(ngModel)]="isMonster"></ion-checkbox>
 	</ion-item>
 	<ion-item>
-		<ion-label>Partys</ion-label>
+		<ion-label> {{ msg.partyLabel }} </ion-label>
 		<ion-checkbox [(ngModel)]="isParty"></ion-checkbox>
 	</ion-item>
 
@@ -82,7 +72,7 @@
 	<ion-item>
 		<ion-buttons>
 			<button ion-button block (click)="returnThisCreatures()">
-				Add this creatures!
+				{{ msg.addCreatureBtn }}
 			</button>
 		</ion-buttons>
 	</ion-item>

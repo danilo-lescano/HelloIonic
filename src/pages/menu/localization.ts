@@ -16,8 +16,36 @@ export class Localization {
         {
             name: "title",
             values: [
-                "TITLE",
-                "TITULO"
+                "Battle Assistant",
+                "Assistente de Batalha"
+            ]
+        },
+        {
+            name: "bestiaryTitle",
+            values: [
+                "Bestiary",
+                "Bestiário"
+            ]
+        },
+        {
+            name: "playerTitle",
+            values: [
+                "Player",
+                "Jogador"
+            ]
+        },
+        {
+            name: "encouterTitle",
+            values: [
+                "Encounter Groups",
+                "Grupos de Encontro"
+            ]
+        },
+        {
+            name: "optionsTitle",
+            values: [
+                "Options",
+                "Opções"
             ]
         },
     ];

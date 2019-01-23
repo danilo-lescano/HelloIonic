@@ -8,8 +8,8 @@
 				<ion-icon name="trash"></ion-icon>
 			</button>
 		</ion-buttons>
-		<ion-title *ngIf="creature.id">Editing {{creature.name}}</ion-title>
-		<ion-title *ngIf="!creature.id">New Creature</ion-title>
+		<ion-title *ngIf="creature.id">{{ msg.title1 }} {{creature.name}}</ion-title>
+		<ion-title *ngIf="!creature.id">{{ msg.title2 }}</ion-title>
   	</ion-navbar>
 </ion-header>
 
@@ -19,33 +19,33 @@
 			<ion-input type="hidden" formControlName="id" [(ngModel)]="creature.id"></ion-input>
 		</ion-item>
         <ion-item>
-          	<ion-label>Name</ion-label>
+          	<ion-label>{{msg.name}}</ion-label>
           	<ion-input type="text" formControlName="name" [(ngModel)]="creature.name" #nameInput></ion-input>
 		</ion-item>
         <ion-item *ngIf="creatureForm.controls.name.hasError('required') && creatureForm.controls.name.touched">
-			<p style="color: red;">Sorry, field name is required!</p>
+			<p style="color: red;">{{ msg.nameErr }}</p>
 		</ion-item>
 
 		<ion-item>
-			<ion-label>Initiative</ion-label>
+			<ion-label>{{ msg.initiative }}</ion-label>
 			<ion-input type="string" formControlName="initiative" [(ngModel)]="creature.initiative"></ion-input>
 		</ion-item>
         <ion-item *ngIf="creatureForm.controls.initiative.hasError('pattern') && creatureForm.controls.initiative.touched">
-			<p style="color: red;">Ex: d20 + 4 or 2d10</p>
+			<p style="color: red;">{{ msg.diceExemple }}</p>
 		</ion-item>
 		<ion-item>
-			<ion-label>HP</ion-label>
+			<ion-label>{{ msg.hp }}</ion-label>
 			<ion-input type="string" formControlName="hp" [(ngModel)]="creature.hp"></ion-input>
 		</ion-item>
         <ion-item *ngIf="creatureForm.controls.hp.hasError('pattern') && creatureForm.controls.hp.touched">
-			<p style="color: red;">Ex: 5d8 + 20 or 2d10 + 5d4 + 10</p>
+			<p style="color: red;">{{ msg.diceExempl2 }}</p>
 		</ion-item>
 		<ion-item>
-			<ion-label *ngIf="!creature.isPlayer">This is a monster!</ion-label>
-			<ion-label *ngIf="creature.isPlayer">This is a NPC/Player!</ion-label>
+			<ion-label *ngIf="!creature.isPlayer">{{ msg.isMonster }}</ion-label>
+			<ion-label *ngIf="creature.isPlayer">{{ msg.isPlayer }}</ion-label>
 			<ion-toggle formControlName="isPlayer" [(ngModel)]="creature.isPlayer"></ion-toggle>
 		</ion-item>
-        <button ion-button block type="submit" [disabled]="!creatureForm.valid">Save Creature</button>
-        <button ion-button block type="button" (click)="saveAndContinue(creature)" [disabled]="!creatureForm.valid">Save & Continue</button>
+        <button ion-button block type="submit" [disabled]="!creatureForm.valid">{{ msg.saveCreature }}</button>
+        <button ion-button block type="button" (click)="saveAndContinue(creature)" [disabled]="!creatureForm.valid">{{ msg.saveContinue }}</button>
     </form>
 </ion-content>

@@ -1,6 +1,6 @@
 <ion-header>
 	<ion-navbar>
-		<ion-title>Add To Party</ion-title>
+		<ion-title>{{ msg.title }}</ion-title>
 		<ion-buttons end>
 			<button ion-button (click)="closeMe()">
 				<ion-icon name="close-circle"></ion-icon>
@@ -11,17 +11,17 @@
 
 
 <ion-content padding>
-	<p>Add creatures, players or npcs to the party.</p>
+	<p>{{ msg.newMemberMsg }}</p>
 
 	<ion-item>
 		<ion-searchbar [(ngModel)]="nameSearch" placeholder="teste"></ion-searchbar>
 	</ion-item>
 	<ion-item>
-		<ion-label>Player or NPCs</ion-label>
+		<ion-label>{{ msg.playerLabel }}</ion-label>
 		<ion-checkbox [(ngModel)]="isPlayer"></ion-checkbox>
 	</ion-item>
 	<ion-item>
-		<ion-label>Monster</ion-label>
+		<ion-label>{{ msg.monsterLabel }}</ion-label>
 		<ion-checkbox [(ngModel)]="isMonster"></ion-checkbox>
 	</ion-item>
 	<ng-container *ngFor="let creature of creatures">

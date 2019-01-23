@@ -14,10 +14,17 @@ export class Localization {
     }
     private texts: { name: string, values: string[] }[] = [
         {
-            name: "title",
+            name: "title1",
             values: [
-                "TITLE",
-                "TITULO"
+                "Monster",
+                "Monstro"
+            ]
+        },
+        {
+            name: "title2",
+            values: [
+                "Players and NPCs",
+                "Jogador e NPCs"
             ]
         },
     ];

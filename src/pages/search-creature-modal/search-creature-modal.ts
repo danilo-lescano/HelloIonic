@@ -19,7 +19,7 @@ export class SearchCreatureModalPage {
 
 	private numberOfCreatures: number = 0;
 
-	constructor(private navParams: NavParams, private viewController: ViewController, private creatureService: CreatureService) {}
+	constructor(private navParams: NavParams, private viewController: ViewController, private creatureService: CreatureService, private msg: Localization) {}
 	
 	async ionViewWillEnter(){
 		this.loadData();

@@ -58,16 +58,16 @@ export class BattlePage {
 		let resolveLeaving;
 		const canLeave = new Promise<Boolean>(resolve => resolveLeaving = resolve);
 		const alert = this.alertCtrl.create({
-			title: 'Confirm leave',
-			message: 'You will lose all the battle track. Are you sure want to leave?',
+			title: this.msg['confirmLeave'],
+			message: this.msg['leaveMsg'],
 			buttons: [
 				{
-					text: 'No',
+					text: this.msg['no'],
 					role: 'cancel',
 					handler: () => resolveLeaving(false)
 				},
 				{
-					text: 'Yes',
+					text: this.msg['yes'],
 					handler: () => resolveLeaving(true)
 				}
 		  	]
@@ -77,15 +77,17 @@ export class BattlePage {
 	}
 
 	toICreatureGen(creature: ICreature){
+		var auxInitiative = this.calculateDices(creature.initiative);
+		var auxHp = this.calculateDices(creature.hp);
 		let aux: ICreatureGen = {
 			id: creature.id,
 			name: creature.name,
 			initiative: creature.initiative,
 			hp: creature.hp,
 			isPlayer: creature.isPlayer,
-			genInitiative: this.calculateDices(creature.initiative),
-			genHp: this.calculateDices(creature.hp),
-			maxHp: this.calculateDices(creature.hp),
+			genInitiative: auxInitiative,
+			genHp: auxHp,
+			maxHp: auxHp,
 			colorSpan: "",
 			colorFlag: null,
 			numberOrder: null
@@ -93,6 +95,8 @@ export class BattlePage {
 		return aux;
 	}
 	calculateDices(diceString: string){
+		if(!diceString) return 0;
+
 		function calculateDie(die: string){
 			if(!/d/.test(die)) return parseInt(die.trim());
 			var numbs = die.split('d');
@@ -104,8 +108,9 @@ export class BattlePage {
 			return value;
 		}
 
-		var matchRegex = /\d*d?\d+/;
-		var dices = matchRegex.exec(diceString) || [];
+		var matchRegex = /\d*d?\d+/ig;
+		var dices = diceString.match(matchRegex) || [];
+		
 		var value: number = 0;
 		for (let i = 0; i < dices.length; i++)
 			value += calculateDie(dices[i]);
@@ -138,10 +143,6 @@ export class BattlePage {
 	}
 	sortCreatures(){
 		this.battleCreatures.sort(function(a, b){
-			/*if(a.isPlayer && !b.isPlayer) return 1;
-			if(!a.isPlayer && b.isPlayer) return -1;
-			if(a.name < b.name) return -1;
-			if(a.name > b.name) return 1;*/
 			if(a.genInitiative < b.genInitiative) return 1;
 			if(a.genInitiative > b.genInitiative) return -1;
 			return 0;

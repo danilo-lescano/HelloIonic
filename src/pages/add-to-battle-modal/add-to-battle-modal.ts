@@ -27,7 +27,7 @@ export class AddToBattleModalPage {
 	private isMonster: boolean = true;
 	private isParty: boolean = true;
 
-	constructor(private navParams: NavParams, private viewController: ViewController, private modal: ModalController, private creatureService: CreatureService, private partyService: PartyService) {}
+	constructor(private navParams: NavParams, private viewController: ViewController, private modal: ModalController, private creatureService: CreatureService, private partyService: PartyService, private msg: Localization) {}
 	  
 	async ionViewWillEnter(){
 		this.creatures = await this.navParams.get("creatures").slice().sort(function(a, b){

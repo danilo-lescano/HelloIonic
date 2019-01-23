@@ -5,7 +5,7 @@
 				<ion-icon name="add-circle"></ion-icon>
 			</button>
 		</ion-buttons>
-		<ion-title>Battle</ion-title>
+		<ion-title> {{ msg.title }} </ion-title>
 	</ion-navbar>
 </ion-header>
 
@@ -14,7 +14,7 @@
 	<ion-list>
 		<ion-item>
 			<h2>
-				Base damage multiplier:
+				{{ msg.baseDmgMsg }}
 				<span style="font-weight: bold;" ng-bind="multiplier">{{ multiplier }}</span>
 			</h2>
 			<ion-buttons class="add-button">
@@ -33,7 +33,7 @@
 			<div>
 				<div class="genBox">
 					<span ion-text [color]="creature.colorSpan">
-						HP:
+						{{ msg.hpDoubleDot }}
 						<span contenteditable="true">{{ creature.genHp }}</span>
 					</span>
 					<span>/{{ creature.maxHp }}</span>
@@ -51,7 +51,7 @@
 					</ion-buttons>
 				</div>
 				<div class="genBox">
-					Initiative:
+					{{ msg.initiativeDoubleDot }}
 					<div class="personalInputSpan">
 						<input type="number" class="personalInput" value="{{creature.genInitiative}}"
 						onfocus="this.parentNode.classList.add('blueBorder')"
