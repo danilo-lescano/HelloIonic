@@ -79,7 +79,7 @@ export class Localization {
         {
             name: "saveParty",
             values: [
-                "Save Party",
+                "Save Group",
                 "Salvar Grupo"
             ]
         }

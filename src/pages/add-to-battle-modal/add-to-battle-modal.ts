@@ -27,6 +27,8 @@ export class AddToBattleModalPage {
 	private isMonster: boolean = true;
 	private isParty: boolean = true;
 
+	private numberOfCreatures: number = 0;
+
 	constructor(private navParams: NavParams, private viewController: ViewController, private modal: ModalController, private creatureService: CreatureService, private partyService: PartyService, private msg: Localization) {}
 	  
 	async ionViewWillEnter(){
@@ -43,23 +45,29 @@ export class AddToBattleModalPage {
 	}
 
 	removeCreature(creature: ICreature){
-		if(this.creaturesId[creature.id])
+		if(this.creaturesId[creature.id]){
 			this.creaturesId[creature.id]--;
+			this.numberOfCreatures--;
+		}
 	}
 	addCreature(creature: ICreature){
 		if(!this.creaturesId[creature.id])
 			this.creaturesId[creature.id] = 0;
 		this.creaturesId[creature.id]++;
+		this.numberOfCreatures++;
 	}
 
 	removeParty(party: IParty){
-		if(this.partiesId[party.id])
+		if(this.partiesId[party.id]){
 			this.partiesId[party.id]--;
+			this.numberOfCreatures--;
+		}
 	}
 	addParty(party: IParty){
 		if(!this.partiesId[party.id])
 			this.partiesId[party.id] = 0;
 		this.partiesId[party.id]++;
+		this.numberOfCreatures++;
 	}
 
 	closeMe(){

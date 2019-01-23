@@ -48,13 +48,6 @@ export class Localization {
                 "Monstro"
             ]
         },
-        {
-            name: "addCreatureBtn",
-            values: [
-                "Add this creatures!",
-                "Adicionar essas criaturas!"
-            ]
-        },
         
     ];
 }

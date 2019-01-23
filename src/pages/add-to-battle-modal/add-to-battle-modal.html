@@ -2,9 +2,6 @@
 	<ion-navbar>
 		<ion-title>{{ msg.title }}</ion-title>
 		<ion-buttons end>
-			<button ion-button large (click)="returnThisCreatures()">
-				<ion-icon name="add-circle"></ion-icon>
-			</button>
 			<button ion-button large (click)="closeMe()">
 				<ion-icon name="close-circle"></ion-icon>
 			</button>
@@ -69,11 +66,9 @@
 		</ion-item>
 	</ng-container>
 
-	<ion-item>
-		<ion-buttons>
-			<button ion-button block (click)="returnThisCreatures()">
-				{{ msg.addCreatureBtn }}
-			</button>
-		</ion-buttons>
-	</ion-item>
+	<ion-buttons [class]="numberOfCreatures > 0 ? 'bottomFixed' : ''">
+		<button ion-button round (click)="returnThisCreatures()">
+			<ion-icon name="add"></ion-icon>
+		</button>
+	</ion-buttons>
 </ion-content>
