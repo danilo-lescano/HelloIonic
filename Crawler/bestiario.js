@@ -1879,35 +1879,60 @@ var lista = [
     {name: "Simple Corruption Templates", link: "https://www.d20pfsrd.com/bestiary/monster-listings/templates/simple-corruption-templates/"},
     {name: "Sinwarped Creature", link: "https://www.d20pfsrd.com/bestiary/monster-listings/templates/sinwarped-creatures/"},
 ];
-var total = 0;
-for (let i = 0; i < lista.length; i++) { //1; i++){
-    // ----->   \<p class="description"\>.*\<\/p\></p>
-    // ----->   \<div class="statblock"\>(.*\n*)*\<\/div\>
-    https.get(lista[i].link, (resp) => {
-    let data = '';
+function get(index){
+    https.get(lista[index].link, (resp) => {
+        let data = '';
 
-    // A chunk of data has been recieved.
-    resp.on('data', (chunk) => {
-        data += chunk;
-    });
+        resp.on('data', (chunk) => {
+            data += chunk;
+        });
 
-    // The whole response has been received. Print out the result.
-    resp.on('end', async () => {
-        console.log(++total + " of " + lista.length);
-        //data.replace(/\n/g, "");
-        //data.replace(/\s/g, "");
-        var description = /\<p class="description"\>.*\<\/p\>/.exec(data);
-        description = description ? description[0] : "";
-        //console.log(description);
-        var statblock = data.split('<div class="statblock">');
-        statblock = statblock ? statblock[1] : "";
-        statblock = statblock ? statblock.split('</div>')[0] : "";
-        //console.log(statblock);
-        //var statblock = /\<div class="statblock"\>(.*\n*\s*)*\<\/div\>/.exec(data)[0];
-    });
+        resp.on('end', async () => {
+            console.log((++cont) + " of " + lista.length);
+            var description = /\<p class="description"\>.*\<\/p\>/.exec(data);
+            description = description ? description[0] : "";
+            lista[index].description = description;
+            var statblock = data.split('<div class="statblock">');
+            statblock = statblock ? statblock[1] : "";
+            if(statblock)
+                statblock = findDiv(statblock);
+            lista[index].description = description;
+            lista[index].statblock = statblock;
+
+            sem();
+        });
 
     }).on("error", (err) => {
         console.log("Error: " + err.message);
     });
-    
+}
+function findDiv(data){
+    var sd = data.split('</div>'); //split data
+    var rd = ""; //return data
+    var flag = true;
+    for(var i = 0; sd && i < sd.length && flag; i++){
+        rd += sd[i];
+        if(!sd[i].match('<div'))
+            flag = false;
+    }
+    return rd;
+}
+
+var total = 0;
+var cont = 0;
+var semaforo = 99;
+function sem(){
+    semaforo = (semaforo + 1) % 100;
+    if(semaforo == 0)
+        for (let i = 0; i < 100 && total < lista.length; i++)
+            get(total++);
+    if(cont == lista.length)
+        save();
+}sem();
+
+function save(){
+    fs.writeFile('~/Users/estagioeducacao1/Desktop/bestiary_body.json', JSON.parse(lista), function(err, data) {
+        if (err) throw err;
+        console.log('Saved!');
+    });
 }
