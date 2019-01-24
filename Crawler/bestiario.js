@@ -1,4 +1,5 @@
 var https = require('https');
+var fs = require("fs");
 var lista = [
     {name: "Aatheriexa", link: "https://www.d20pfsrd.com/bestiary/monster-listings/aberrations/aatheriexa/"},
     {name: "Aboleth", link: "https://www.d20pfsrd.com/bestiary/monster-listings/aberrations/aboleth/"},
@@ -1904,6 +1905,7 @@ function get(index){
 
     }).on("error", (err) => {
         console.log("Error: " + err.message);
+        get(index);
     });
 }
 function findDiv(data){
@@ -1920,18 +1922,18 @@ function findDiv(data){
 
 var total = 0;
 var cont = 0;
-var semaforo = 99;
+var semaforo = 49;
 function sem(){
-    semaforo = (semaforo + 1) % 100;
+    semaforo = (semaforo + 1) % 50;
     if(semaforo == 0)
-        for (let i = 0; i < 100 && total < lista.length; i++)
+        for (let i = 0; i < 50 && total < lista.length; i++)
             get(total++);
     if(cont == lista.length)
         save();
 }sem();
 
 function save(){
-    fs.writeFile('~/Users/estagioeducacao1/Desktop/bestiary_body.json', JSON.parse(lista), function(err, data) {
+    fs.writeFile('bestiary_body.json', JSON.stringify(lista), function(err, data) {
         if (err) throw err;
         console.log('Saved!');
     });
