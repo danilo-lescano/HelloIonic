@@ -47,10 +47,8 @@ function start(){
     console.log("total: " + lista.length);
     console.log("cont: " + cont);
     console.log("erros: " + err);
-    for (let i = 0; i < array.length; i++)
-        console.log(defeito[i].name);
     
-    //save();
+    save();
 }
 
 function save(){
