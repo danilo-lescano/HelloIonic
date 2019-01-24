@@ -1879,7 +1879,8 @@ var lista = [
     {name: "Simple Corruption Templates", link: "https://www.d20pfsrd.com/bestiary/monster-listings/templates/simple-corruption-templates/"},
     {name: "Sinwarped Creature", link: "https://www.d20pfsrd.com/bestiary/monster-listings/templates/sinwarped-creatures/"},
 ];
-for (let i = 0; i < 1; i++){//lista.length; i++) {
+var total = 0;
+for (let i = 0; i < lista.length; i++) { //1; i++){
     // ----->   \<p class="description"\>.*\<\/p\></p>
     // ----->   \<div class="statblock"\>(.*\n*)*\<\/div\>
     https.get(lista[i].link, (resp) => {
@@ -1892,18 +1893,21 @@ for (let i = 0; i < 1; i++){//lista.length; i++) {
 
     // The whole response has been received. Print out the result.
     resp.on('end', async () => {
-        data.replace(/\n/g, "");
-        data.replace(/\s/g, "");
-        var description = /\<p class="description"\>.*\<\/p\>/.exec(data)[0];
-        console.log(description);
-        var statblock = /\<div class="statblock"\>(.*\n*\s*)*\<\/div\>/.exec(data)[0];
-        console.log(1);
-        console.log(statblock + "1");
+        console.log(++total + " of " + lista.length);
+        //data.replace(/\n/g, "");
+        //data.replace(/\s/g, "");
+        var description = /\<p class="description"\>.*\<\/p\>/.exec(data);
+        description = description ? description[0] : "";
+        //console.log(description);
+        var statblock = data.split('<div class="statblock">');
+        statblock = statblock ? statblock[1] : "";
+        statblock = statblock ? statblock.split('</div>')[0] : "";
+        //console.log(statblock);
+        //var statblock = /\<div class="statblock"\>(.*\n*\s*)*\<\/div\>/.exec(data)[0];
     });
 
     }).on("error", (err) => {
         console.log("Error: " + err.message);
     });
     
-    console.log((i+1) + " of " + lista.length);
 }
