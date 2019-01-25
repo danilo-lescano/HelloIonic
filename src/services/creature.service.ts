@@ -83,6 +83,10 @@ export class CreatureService {
         var onceRoutineFlag = await this.storage.get('onceRoutineFlag');
         if(!onceRoutineFlag){
             var fixedList = FixedList;
+
+            var creatureCountAux = await this.storage.get("creatureCount");
+            if(creatureCountAux) this.creatureCount = creatureCountAux;
+
             for (let i = 0; i < fixedList.length; i++) {
                 this.creatures.push({
                     id: ++this.creatureCount,
