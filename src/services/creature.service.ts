@@ -86,6 +86,8 @@ export class CreatureService {
 
             var creatureCountAux = await this.storage.get("creatureCount");
             if(creatureCountAux) this.creatureCount = creatureCountAux;
+            var creaturesAux = await this.storage.get("creatures");
+            if(creaturesAux) this.creatures = creaturesAux;
 
             for (let i = 0; i < fixedList.length; i++) {
                 this.creatures.push({
