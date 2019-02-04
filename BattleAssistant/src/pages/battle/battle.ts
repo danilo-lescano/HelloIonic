@@ -35,9 +35,6 @@ export class BattlePage {
 
 	private multiplier: number = 1;
 
-	private isDamage: boolean = false;
-	private isHeal: boolean = false;
-	
 	private numberOrder: number[] = [];
 
 	constructor(public navCtrl: NavController, public navParams: NavParams, private creatureService: CreatureService, private partyService: PartyService, private modal: ModalController, private popoverCtrl: PopoverController, private alertCtrl: AlertController, private msg: Localization) {}

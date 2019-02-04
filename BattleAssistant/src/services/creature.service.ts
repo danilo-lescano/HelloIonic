@@ -69,7 +69,6 @@ export class CreatureService {
         return this.creatures.slice();
     }
     async getLastCreature(){
-        let returnCreature: ICreature;
         this.creatures = await this.storage.get('creatures');
         this.creatureCount = await this.storage.get('creatureCount');
         for (let i = 0; this.creatures && i < this.creatures.length; i++) {

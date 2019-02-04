@@ -16,19 +16,20 @@ export class AddCreaturePage {
 	@ViewChild('nameInput') nameInput;
 
 	private creature: ICreature;
-	private creatureForm: any;
+	private creatureForm: any = null;
 
 	private listCreaturesAdded: ICreature[] = [];
 
 	constructor(private viewController: ViewController, private navParams: NavParams, private creatureService: CreatureService, private formBuilder: FormBuilder, private msg: Localization) {
 		this.loadCreature();
-		this.creatureForm = formBuilder.group({
-			id: ['', Validators.compose([])],
-			name: ['', Validators.compose([Validators.required])],
-			initiative: ['', Validators.compose([Validators.pattern(/\d*d?\d+/g)])],
-			hp: ['', Validators.compose([Validators.pattern(/\d*d?\d+/g)])],
-			isPlayer: ['', Validators.compose([])],
-		});
+		if(this.creatureForm == null)
+			this.creatureForm = formBuilder.group({
+				id: ['', Validators.compose([])],
+				name: ['', Validators.compose([Validators.required])],
+				initiative: ['', Validators.compose([Validators.pattern(/\d*d?\d+/g)])],
+				hp: ['', Validators.compose([Validators.pattern(/\d*d?\d+/g)])],
+				isPlayer: ['', Validators.compose([])],
+			});
 	}
 
 	async loadCreature(){
